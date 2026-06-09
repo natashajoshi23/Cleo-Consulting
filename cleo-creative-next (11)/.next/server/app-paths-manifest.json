@@ -1,0 +1,10 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/team/page": "app/team/page.js",
+  "/managed-services/page": "app/managed-services/page.js",
+  "/blogs/page": "app/blogs/page.js",
+  "/managed-services/[slug]/page": "app/managed-services/[slug]/page.js",
+  "/contact/page": "app/contact/page.js"
+}
