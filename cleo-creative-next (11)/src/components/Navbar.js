@@ -69,7 +69,16 @@ export default function Navbar() {
           </li>
         ))}
         <li>
-          <Link href="/contact" className="nav-cta-link">Contact</Link>
+          <div style={{ display: 'flex', gap: '0rem', alignItems: 'center' }}>
+            <Link href="/contact" style={{ padding: '0.7rem 2rem', border: '1px solid var(--fog)', fontSize: '0.95rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--paper)', textDecoration: 'none', transition: 'all 0.3s', borderRadius: '2px' }}
+              onMouseOver={e => { e.currentTarget.style.background = 'var(--paper)'; e.currentTarget.style.color = 'var(--ink)'; e.currentTarget.style.borderColor = 'var(--paper)' }}
+              onMouseOut={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--paper)'; e.currentTarget.style.borderColor = 'var(--fog)' }}
+            >Contact Us</Link>
+            <Link href="/apply" style={{ padding: '0.75rem 2rem', background: 'var(--gold)', fontSize: '0.95rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink)', textDecoration: 'none', fontWeight: 700, transition: 'all 0.3s', borderRadius: '2px' }}
+              onMouseOver={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(200,153,31,0.4)' }}
+              onMouseOut={e => { e.currentTarget.style.background = 'var(--gold)'; e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none' }}
+            >Apply Now</Link>
+          </div>
         </li>
         <li>
           <button

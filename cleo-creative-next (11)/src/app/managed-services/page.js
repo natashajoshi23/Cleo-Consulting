@@ -1,5 +1,5 @@
 import PageBanner from '@/components/PageBanner'
-import CTABand from '@/components/CTABand'
+// import CTABand from '@/components/CTABand'
 import Link from 'next/link'
 export const metadata = { title: 'Managed Services — Cleo Consulting' }
 const svcs = [
@@ -34,7 +34,7 @@ export default function ManagedServices() {
           </div>
         </div>
       </div>
-      <CTABand label="Find your specialist" title="LET'S<br><em>Talk</em>" btnText="Get in Touch" btnHref="/contact" />
+      {/* <CTABand label="Find your specialist" title="LET'S<br><em>Talk</em>" btnText="Get in Touch" btnHref="/contact" /> */}
     </>
   )
 }

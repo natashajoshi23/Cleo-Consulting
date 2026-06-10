@@ -1,5 +1,5 @@
 import PageBanner from '@/components/PageBanner'
-import CTABand from '@/components/CTABand'
+// import CTABand from '@/components/CTABand'
 import Link from 'next/link'
 export const metadata = { title: 'Blogs — Cleo Consulting' }
 const posts = [
@@ -24,7 +24,7 @@ export default function Blogs() {
           ))}
         </div>
       </div>
-      <CTABand label="Stay sharp" title="LET\'S<br><em>Connect</em>" btnText="Contact Us" btnHref="/contact" />
+      {/* <CTABand label="Stay sharp" title="LET\'S<br><em>Connect</em>" btnText="Contact Us" btnHref="/contact" /> */}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import PageBanner from '@/components/PageBanner'
-import CTABand from '@/components/CTABand'
+// import CTABand from '@/components/CTABand'
 export const metadata = { title: 'Social Responsibility — Cleo Consulting' }
 export default function CSR() {
   return (
@@ -20,7 +20,7 @@ export default function CSR() {
           ))}
         </div>
       </div>
-      <CTABand label="Partner with purpose" title="JOIN<br><em>Us</em>" btnText="Contact Us" btnHref="/contact" />
+      {/* <CTABand label="Partner with purpose" title="JOIN<br><em>Us</em>" btnText="Contact Us" btnHref="/contact" /> */}
     </>
   )
 }

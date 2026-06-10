@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import PageBanner from '@/components/PageBanner'
-import CTABand from '@/components/CTABand'
+// import CTABand from '@/components/CTABand'
 
 const blogs = {
   'palo-alto-engineers': {
@@ -106,7 +106,7 @@ export default function BlogPage({ params }) {
           <Link href="/blogs" style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)', textDecoration: 'none' }}>\u2190 Back to All Insights</Link>
         </div>
       </div>
-      <CTABand label="Get in touch" title="LET\'S<br><em>Connect</em>" btnText="Contact Us" btnHref="/contact" />
+      {/* <CTABand label="Get in touch" title="LET\'S<br><em>Connect</em>" btnText="Contact Us" btnHref="/contact" /> */}
     </>
   )
 }

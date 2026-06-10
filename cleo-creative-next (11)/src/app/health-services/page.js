@@ -1,5 +1,5 @@
 import PageBanner from '@/components/PageBanner'
-import CTABand from '@/components/CTABand'
+// import CTABand from '@/components/CTABand'
 export const metadata = { title: 'Health Services — Cleo Consulting' }
 export default function HealthServices() {
   return (
@@ -31,7 +31,7 @@ export default function HealthServices() {
           </div>
         </div>
       </div>
-      <CTABand label="Healthcare solutions" title="STAFF<br><em>Smarter</em>" btnText="Contact Us" btnHref="/contact" />
+      {/* <CTABand label="Healthcare solutions" title="STAFF<br><em>Smarter</em>" btnText="Contact Us" btnHref="/contact" /> */}
     </>
   )
 }

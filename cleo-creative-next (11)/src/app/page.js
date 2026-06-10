@@ -8,7 +8,7 @@ import StaggerReveal from '@/components/StaggerReveal'
 
 const slides = [
   { eyebrow: 'Welcome to Cleo Consulting', lines: ['IT CONSULTING', '&', 'Recruitment Experts'], desc: 'A hardworking and dedicated firm built by partners with 40+ years of combined experience in IT Consulting and Recruitment.', btn1: { label: 'Contact Us', href: '/contact' }, btn2: { label: 'Meet the Team', href: '/team' }, bg: '/images/city-skyscrapers.webp' },
-  { eyebrow: 'Talent Acquisition', lines: ['WE SNIFF', 'OUT THE', 'Best Talent'], desc: 'End-to-end recruitment across IT, Finance, Engineering, Customer Service, Admin Support and Sales — across USA, Canada & India.', btn1: { label: 'Managed Services', href: '/managed-services' }, btn2: { label: 'Get in Touch', href: '/contact' }, bg: '/images/silhouettes-city.webp' },
+  { eyebrow: 'Talent Acquisition', lines: ['WE SNIFF', 'OUT THE', 'Best Talent'], desc: 'End-to-end recruitment across IT, Finance, Engineering, Customer Service, Admin Support and Sales — across USA, Canada & India.', btn1: { label: 'Managed Services', href: '/managed-services' }, btn2: { label: 'Apply Now', href: '/contact' }, bg: '/images/silhouettes-city.webp' },
   { eyebrow: 'North America & India', lines: ['OPERATING IN', 'USA,', 'Canada & India'], desc: 'Strategic partnerships for consulting projects with both onshore and offshore delivery models tailored to your needs.', btn1: { label: 'View Projects', href: '/projects' }, btn2: { label: 'Health Services', href: '/health-services' }, bg: '/images/night-city.webp' },
 ]
 
