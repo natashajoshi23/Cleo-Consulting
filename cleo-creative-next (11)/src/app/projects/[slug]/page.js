@@ -27,7 +27,7 @@ const projects = {
   'cloud-integration-services': {
     title: 'Cloud Integration Services',
     banner: 'CLOUD<br>INTEGRATION',
-    img: '/images/server-rack.webp',
+    img: '/images/laptop-teamwork.webp',
     sections: [
       { heading: '', text: "In today\u2019s digital landscape, businesses rely on various cloud-based applications and systems to drive productivity and growth. At Cleo, we support all major cloud products \u2013 MS Azure, AMAZON, Google Cloud etc. We specialize in providing comprehensive cloud integration solutions that connect and streamline your business processes. With our expertise and cutting-edge technology, we help you leverage the power of the cloud to optimize your operations and achieve your business goals." },
     ],
@@ -113,7 +113,7 @@ const projects = {
   'it-networking-solutions': {
     title: 'IT Networking Solutions',
     banner: 'IT<br>NETWORKING',
-    img: '/images/server-rack.webp',
+    img: '/images/laptop-teamwork.webp',
     sections: [
       { heading: '', text: "In today\u2019s interconnected world, a robust and reliable network infrastructure is essential for the smooth functioning of businesses. At Cleo, we specialize in delivering cutting-edge IT networking solutions that optimize connectivity, enhance performance, and enable seamless communication across your organization. With our expertise and innovative technologies, we help you build a solid foundation for your digital transformation journey." },
     ],
@@ -247,11 +247,11 @@ const projects = {
 
 const imgs = {
   'cisco-network-solutions': '/images/digital-globe.webp',
-  'cloud-integration-services': '/images/server-rack.webp',
+  'cloud-integration-services': '/images/laptop-teamwork.webp',
   'cyber-security-services': '/images/code-blue.webp',
   'palo-alto-network-solutions': '/images/night-city.webp',
   'data-science-solutions': '/images/circuit-brain.webp',
-  'it-networking-solutions': '/images/server-rack.webp',
+  'it-networking-solutions': '/images/laptop-teamwork.webp',
   'salesforce-services': '/images/laptop-teamwork.webp',
   'servicenow-service': '/images/desk-bw.webp',
   'software-development': '/images/code-python.webp',

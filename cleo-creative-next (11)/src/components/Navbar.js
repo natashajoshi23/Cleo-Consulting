@@ -20,7 +20,7 @@ export default function Navbar() {
   const linkStyle = {
     color: 'var(--fog)',
     textDecoration: 'none',
-    fontSize: '1.2rem',
+    fontSize: '1.05rem',
     fontWeight: 500,
     letterSpacing: '0.16em',
     textTransform: 'uppercase',
@@ -29,8 +29,10 @@ export default function Navbar() {
     paddingBottom: '2px',
   }
 
+  const isAboutActive = pathname.includes('/team') || pathname.includes('/social')
+
   return (
-    <nav id="nav" className={scrolled ? 'scrolled' : ''}>
+    <nav id="nav" role="banner" className={scrolled ? 'scrolled' : ''}>
       <Link href="/" className="nav-logo">
         <Image
           src={isDark ? '/images/logo-dark.webp' : '/images/logo-light.webp'}
@@ -42,19 +44,19 @@ export default function Navbar() {
       </Link>
 
       <ul className="nav-links">
-        <li><Link href="/" style={{ ...linkStyle, color: pathname === '/' ? 'var(--gold)' : linkStyle.color }}>Home</Link></li>
+        <li><Link href="/" style={{ ...linkStyle, color: pathname === '/' ? 'var(--gold)' : linkStyle.color, borderBottom: pathname === '/' ? '2px solid var(--gold)' : '2px solid transparent', fontWeight: pathname === '/' ? 700 : 500 }}>Home</Link></li>
         <li
           style={{ position: 'relative' }}
           onMouseEnter={() => setAboutOpen(true)}
           onMouseLeave={() => setAboutOpen(false)}
         >
-          <span style={{ ...linkStyle, cursor: 'pointer', color: (pathname.includes('/team') || pathname.includes('/social')) ? 'var(--gold)' : 'var(--fog)' }}>
+          <span style={{ ...linkStyle, cursor: 'pointer', color: isAboutActive ? 'var(--gold)' : 'var(--fog)', borderBottom: isAboutActive ? '2px solid var(--gold)' : '2px solid transparent', fontWeight: isAboutActive ? 700 : 500 }}>
             About ▾
           </span>
           {aboutOpen && (
             <div style={{ position: 'absolute', top: '100%', left: 0, background: 'var(--ink2)', border: '1px solid var(--ghost)', minWidth: '190px', padding: '0.4rem 0', zIndex: 300 }}>
-              <Link href="/team" style={{ display: 'block', padding: '0.65rem 1.2rem', color: 'var(--fog)', fontSize: '0.68rem', textDecoration: 'none', letterSpacing: '0.14em', textTransform: 'uppercase' }}>Our Team</Link>
-              <Link href="/social-responsibility" style={{ display: 'block', padding: '0.65rem 1.2rem', color: 'var(--fog)', fontSize: '0.68rem', textDecoration: 'none', letterSpacing: '0.14em', textTransform: 'uppercase' }}>Social Responsibility</Link>
+              <Link href="/team" style={{ display: 'block', padding: '0.65rem 1.2rem', color: pathname === '/team' ? 'var(--gold)' : 'var(--fog)', fontSize: '0.68rem', textDecoration: 'none', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: pathname === '/team' ? 700 : 400 }}>Our Team</Link>
+              <Link href="/social-responsibility" style={{ display: 'block', padding: '0.65rem 1.2rem', color: pathname === '/social-responsibility' ? 'var(--gold)' : 'var(--fog)', fontSize: '0.68rem', textDecoration: 'none', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: pathname === '/social-responsibility' ? 700 : 400 }}>Social Responsibility</Link>
             </div>
           )}
         </li>
@@ -65,18 +67,18 @@ export default function Navbar() {
           { href: '/blogs', label: 'Insights' },
         ].map(({ href, label }) => (
           <li key={href}>
-            <Link href={href} style={{ ...linkStyle, color: pathname === href ? 'var(--gold)' : 'var(--fog)' }}>{label}</Link>
+            <Link href={href} style={{ ...linkStyle, color: pathname === href || pathname.startsWith(href + '/') ? 'var(--gold)' : 'var(--fog)', borderBottom: pathname === href || pathname.startsWith(href + '/') ? '2px solid var(--gold)' : '2px solid transparent', fontWeight: pathname === href || pathname.startsWith(href + '/') ? 700 : 500 }}>{label}</Link>
           </li>
         ))}
         <li>
-          <div style={{ display: 'flex', gap: '0rem', alignItems: 'center' }}>
-            <Link href="/contact" style={{ padding: '0.7rem 2rem', border: '1px solid var(--fog)', fontSize: '0.95rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--paper)', textDecoration: 'none', transition: 'all 0.3s', borderRadius: '2px' }}
-              onMouseOver={e => { e.currentTarget.style.background = 'var(--paper)'; e.currentTarget.style.color = 'var(--ink)'; e.currentTarget.style.borderColor = 'var(--paper)' }}
-              onMouseOut={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--paper)'; e.currentTarget.style.borderColor = 'var(--fog)' }}
-            >Contact Us</Link>
-            <Link href="/apply" style={{ padding: '0.75rem 2rem', background: 'var(--gold)', fontSize: '0.95rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink)', textDecoration: 'none', fontWeight: 700, transition: 'all 0.3s', borderRadius: '2px' }}
-              onMouseOver={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(200,153,31,0.4)' }}
-              onMouseOut={e => { e.currentTarget.style.background = 'var(--gold)'; e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none' }}
+          <div style={{ display: 'flex', overflow: 'hidden', borderRadius: '2px' }}>
+            <Link href="/contact" style={{ padding: '0.6rem 2rem', background: pathname === '/contact' ? 'var(--paper)' : 'transparent', border: '1px solid var(--fog)', borderRight: 'none', fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: pathname === '/contact' ? 'var(--ink)' : 'var(--paper)', textDecoration: 'none', fontWeight: 550, transition: 'all 0.3s' }}
+              onMouseOver={e => { e.currentTarget.style.background = 'var(--paper)'; e.currentTarget.style.color = 'var(--ink)' }}
+              onMouseOut={e => { if (pathname !== '/contact') { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--paper)' } }}
+            >Contact</Link>
+            <Link href="/apply" style={{ padding: '0.6rem 2rem', background: pathname === '/apply' ? 'var(--paper)' : 'var(--gold)', border: '1px solid ' + (pathname === '/apply' ? 'var(--paper)' : 'var(--gold)'), fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: pathname === '/apply' ? 'var(--ink)' : 'var(--ink)', textDecoration: 'none', fontWeight: 750, transition: 'all 0.3s' }}
+              onMouseOver={e => { e.currentTarget.style.background = '#111'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = '#111' }}
+              onMouseOut={e => { if (pathname !== '/apply') { e.currentTarget.style.background = 'var(--gold)'; e.currentTarget.style.color = 'var(--ink)'; e.currentTarget.style.borderColor = 'var(--gold)' } else { e.currentTarget.style.background = 'var(--paper)'; e.currentTarget.style.color = 'var(--ink)'; e.currentTarget.style.borderColor = 'var(--paper)' } }}
             >Apply Now</Link>
           </div>
         </li>
@@ -84,6 +86,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsDark(!isDark)}
             title="Toggle light/dark mode"
+            aria-label="Toggle dark and light mode"
             style={{
               background: 'none',
               border: '1px solid var(--ghost)',

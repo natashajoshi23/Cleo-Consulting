@@ -6,7 +6,7 @@ const services = {
     title: 'Cloud Engineers and Architects',
     subtitle: 'What They Do and Why They Are Important',
     banner: 'CLOUD<br>ENGINEERS',
-    img: '/images/server-rack.webp',
+    img: '/images/laptop-teamwork.webp',
     sections: [
       { heading: '', text: "Cloud computing has revolutionized the way organizations manage and process data. With the increasing adoption of cloud technology, the demand for skilled cloud engineers and architects has grown rapidly. In this article, we will explore the roles and importance of cloud engineers and architects." },
       { heading: 'What is a Cloud Engineer and Architect?', text: "A Cloud Engineer and Architect is a professional who specializes in designing, implementing, and managing cloud-based solutions for organizations. Their responsibilities include assessing an organization\u2019s cloud needs, designing and implementing cloud-based solutions, and ensuring that the solutions are secure, scalable, and efficient. They are required to have a deep understanding of cloud computing technologies, such as Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP)." },

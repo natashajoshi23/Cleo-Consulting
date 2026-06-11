@@ -1,9 +1,8 @@
 import PageBanner from '@/components/PageBanner'
-// import CTABand from '@/components/CTABand'
 import Link from 'next/link'
 export const metadata = { title: 'Managed Services — Cleo Consulting' }
 const svcs = [
-  { title: 'Cloud Engineers & Architects', desc: 'Cloud computing has revolutionized the way organizations manage data.', img: '/images/server-rack.webp', slug: 'cloud-engineers' },
+  { title: 'Cloud Engineers & Architects', desc: 'Cloud computing has revolutionized the way organizations manage data.', img: '/images/laptop-teamwork.webp', slug: 'cloud-engineers' },
   { title: 'Cyber Security Consultant', desc: "Cybersecurity has become a crucial component of every organization's risk strategy.", img: '/images/code-blue.webp', slug: 'cyber-security' },
   { title: 'Data Scientist', desc: 'Data Scientists analyze and interpret complex data, driving informed business decisions.', img: '/images/circuit-brain.webp', slug: 'data-scientist' },
   { title: 'Java & .Net Developer', desc: 'Highly skilled developers to deliver robust, scalable software solutions.', img: '/images/code-python.webp', slug: 'java-dotnet' },
@@ -19,9 +18,9 @@ export default function ManagedServices() {
   return (
     <>
       <PageBanner eyebrow="Specialist Talent" title="MANAGED<br>SERVICES" num="04" bgImage="/images/businessman-suit.webp" />
-      <div style={{ padding: '5rem 0', background: 'var(--ink)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 3rem' }}>
-          <p style={{ fontSize: '0.95rem', color: 'var(--fog)', lineHeight: 1.85, maxWidth: '720px', marginBottom: '3rem' }}>We provide specialist staffing and recruitment solutions across a wide range of disciplines. Whether you need a cloud architect, a cyber security consultant, or a full development team — Cleo connects you with top-tier talent fast.</p>
+      <div style={{ padding: '2.5rem 0 5rem', background: 'var(--ink)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
+          <p style={{ fontSize: '0.95rem', color: 'var(--fog)', lineHeight: 1.85, maxWidth: '720px', textAlign: 'center', margin: '0 auto 2.5rem' }}></p>
           <div className="svcs-grid">
             {svcs.map(({ title, desc, img, slug }) => (
               <Link href={`/managed-services/${slug}`} className="svc" key={title} style={{ textDecoration: 'none' }}>
@@ -34,7 +33,6 @@ export default function ManagedServices() {
           </div>
         </div>
       </div>
-      {/* <CTABand label="Find your specialist" title="LET'S<br><em>Talk</em>" btnText="Get in Touch" btnHref="/contact" /> */}
     </>
   )
 }

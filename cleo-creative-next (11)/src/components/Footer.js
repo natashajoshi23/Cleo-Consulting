@@ -1,14 +1,18 @@
+'use client'
+import { useTheme } from '@/components/ThemeContext'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Footer() {
+  const { theme } = useTheme()
   return (
     <>
-      <footer>
+      <footer role="contentinfo">
         <div className="ft-inner">
           <div className="ft-top">
-            <div>
-            <Image src="/images/logo-dark.webp" alt="Cleo Consulting" width={180} height={80} style={{ height: '160px', width: 'auto', objectFit: 'contain', marginBottom: '1rem', display: 'block', margin: '0 auto 1rem' }} />              <p className="ft-desc">A partner-led IT Consulting and Recruitment firm operating across USA, Canada & India. Built by partners with 40+ years of combined experience.</p>
+            <div style={{ height: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+            <Image src="/images/logo-dark.webp" alt="Cleo Consulting" width={180} height={80} className="footer-logo-dark" style={{ height: '160px', width: 'auto', objectFit: 'contain', display: 'block', margin: '2.3rem auto 1rem' }} />
+            <Image src="/images/logo-light.webp" alt="Cleo Consulting" width={180} height={80} className="footer-logo-light" style={{ height: '200px', width: 'auto', objectFit: 'contain', display: 'block', margin: '2rem auto 1rem' }} />
             </div>
             <div>
               <div className="ft-col-title">Company</div>
@@ -32,12 +36,15 @@ export default function Footer() {
                 <li><Link href="/contact">Contact Us</Link></li>
                 <li><Link href="/contact">Our Offices</Link></li>
                 <li><a href="mailto:info@cleoconsult.com">info@cleoconsult.com</a></li>
+                <li><a href="https://www.linkedin.com/company/cleo-consulting-inc-/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
               </ul>
             </div>
           </div>
           <div className="ft-bottom">
             <span>© 2026 Cleo Consulting. All rights reserved.</span>
             <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/sitemap">Sitemap</a>
+            <a href="https://www.linkedin.com/company/cleo-consulting-inc-/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)' }}>LinkedIn</a>
           </div>
         </div>
       </footer>

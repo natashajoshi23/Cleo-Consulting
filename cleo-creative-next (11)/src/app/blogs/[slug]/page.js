@@ -19,7 +19,7 @@ const blogs = {
     title: 'What Are Cloud Integration Services?',
     date: '04 February 2024',
     banner: 'CLOUD<br>INTEGRATION',
-    img: '/images/server-rack.webp',
+    img: '/images/laptop-teamwork.webp',
     content: [
       'Cloud integration services help organizations connect cloud-based applications, on-premise systems, APIs, and data sources to create a unified technology ecosystem. As businesses adopt more cloud solutions, the need for seamless integration becomes critical.',
       'At Cleo Consulting, we help organizations navigate the complexities of cloud integration by providing expert consultants who specialize in connecting disparate systems. Our professionals work with all major cloud platforms including AWS, Azure, and Google Cloud.',
@@ -103,7 +103,7 @@ export default function BlogPage({ params }) {
           <p key={i} style={{ fontSize: '0.95rem', color: 'var(--fog)', lineHeight: 1.9, marginBottom: '1.5rem' }}>{p}</p>
         ))}
         <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--ghost)' }}>
-          <Link href="/blogs" style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)', textDecoration: 'none' }}>\u2190 Back to All Insights</Link>
+          <Link href="/blogs" style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)', textDecoration: 'none' }}>{'\u2190'} Back to All Insights</Link>
         </div>
       </div>
       {/* <CTABand label="Get in touch" title="LET\'S<br><em>Connect</em>" btnText="Contact Us" btnHref="/contact" /> */}

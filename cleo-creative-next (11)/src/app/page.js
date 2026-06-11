@@ -7,9 +7,9 @@ import AnimatedCounter from '@/components/AnimatedCounter'
 import StaggerReveal from '@/components/StaggerReveal'
 
 const slides = [
-  { eyebrow: 'Welcome to Cleo Consulting', lines: ['IT CONSULTING', '&', 'Recruitment Experts'], desc: 'A hardworking and dedicated firm built by partners with 40+ years of combined experience in IT Consulting and Recruitment.', btn1: { label: 'Contact Us', href: '/contact' }, btn2: { label: 'Meet the Team', href: '/team' }, bg: '/images/city-skyscrapers.webp' },
-  { eyebrow: 'Talent Acquisition', lines: ['WE SNIFF', 'OUT THE', 'Best Talent'], desc: 'End-to-end recruitment across IT, Finance, Engineering, Customer Service, Admin Support and Sales — across USA, Canada & India.', btn1: { label: 'Managed Services', href: '/managed-services' }, btn2: { label: 'Apply Now', href: '/contact' }, bg: '/images/silhouettes-city.webp' },
-  { eyebrow: 'North America & India', lines: ['OPERATING IN', 'USA,', 'Canada & India'], desc: 'Strategic partnerships for consulting projects with both onshore and offshore delivery models tailored to your needs.', btn1: { label: 'View Projects', href: '/projects' }, btn2: { label: 'Health Services', href: '/health-services' }, bg: '/images/night-city.webp' },
+  { eyebrow: 'Welcome to Cleo Consulting', lines: ['IT CONSULTING', '&', 'Recruitment Experts'], desc: 'A hardworking and dedicated firm built by partners with 200+ years of combined experience in IT Consulting and Recruitment.', btn1: { label: 'Contact Us', href: '/contact' }, btn2: { label: 'Meet the Team', href: '/team' }, bg: '/images/city-skyscrapers.webp' },
+  { eyebrow: 'Talent Acquisition', lines: ['WE SNIFF', 'OUT THE', 'Best Talent'], desc: 'End-to-end recruitment across IT, Finance, Engineering, Customer Service, Admin Support and Sales — across USA, Canada & India.', btn1: { label: 'Managed Services', href: '/managed-services' }, btn2: { label: 'Apply Now', href: '/apply' }, bg: '/images/silhouettes-city.webp' },
+  { eyebrow: 'North America & India', lines: ['OPERATING IN', 'USA, CANADA', '& INDIA'], desc: 'Strategic partnerships for consulting projects with both onshore and offshore delivery models tailored to your needs.', btn1: { label: 'View Projects', href: '/projects' }, btn2: { label: 'Health Services', href: '/health-services' }, bg: '/images/night-city.webp' },
 ]
 
 const services = [
@@ -30,7 +30,7 @@ const roles = [
 ]
 
 const projects = [
-  { title: 'Cisco Network Solutions', text: 'Enterprise Cisco network infrastructure design and deployment for clients across North America.', img: '/images/server-rack.webp' },
+  { title: 'Cisco Network Solutions', text: 'Enterprise Cisco network infrastructure design and deployment for clients across North America.', img: '/images/laptop-teamwork.webp' },
   { title: 'Cloud Integration Services', text: 'Multi-cloud integration across Azure, AWS and GCP driving productivity and scalability.', img: '/images/digital-globe.webp' },
   { title: 'Cyber Security Services', text: 'Advanced security consultation protecting digital assets for enterprise clients worldwide.', img: '/images/circuit-board.webp' },
 ]
@@ -45,10 +45,10 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <div className="hero">
+      <div className="hero" style={{ paddingTop: '12rem' }}>
         {slides.map((s, i) => (
           <div key={i} className="hero-bg-img" style={{ opacity: i === cur ? 1 : 0, transition: 'opacity 0.8s ease-in-out' }}>
-            <img src={s.bg} alt="" />
+            <img src={s.bg} alt="" aria-hidden="true" />
           </div>
         ))}
         <div className="hero-grid" />
@@ -62,7 +62,7 @@ export default function Home() {
                   <h1 className="hero-title">
                     <span className="line">{slide.lines[0]}</span>
                     <span className="line line-gold">{slide.lines[1]}</span>
-                    <span className="line line-italic">{slide.lines[2]}</span>
+                    <span className="line line-gold">{slide.lines[2]}</span>
                   </h1>
                   <p className="hero-desc">{slide.desc}</p>
                   <div className="hero-btns">
@@ -74,12 +74,12 @@ export default function Home() {
               <div className="hero-bottom">
                 <div className="hero-bottom-left">
                   <div className="hero-stats">
-                    <div className="stat"><div className="stat-n">40+</div><div className="stat-l">Yrs Experience</div></div>
-                    <div className="stat"><div className="stat-n">3</div><div className="stat-l">Countries</div></div>
-                    <div className="stat"><div className="stat-n">100%</div><div className="stat-l">Partner-Led</div></div>
+                    <div className="stat"><div className="stat-n">200+</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Yrs Experience</div></div>
+                    <div className="stat"><div className="stat-n">3</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Countries</div></div>
+                    <div className="stat"><div className="stat-n">100%</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Partner-Led</div></div>
                   </div>
                   <div className="hero-dots-wrap">
-                    {slides.map((_, i) => <button key={i} className={`hdot${i === cur ? ' active' : ''}`} onClick={() => setCur(i)} />)}
+                    {slides.map((_, i) => <button key={i} className={`hdot${i === cur ? ' active' : ''}`} onClick={() => setCur(i)} aria-label={`Go to slide ${i + 1}`} />)}
                   </div>
                 </div>
               </div>
@@ -114,22 +114,30 @@ export default function Home() {
       </div>
 
       {/* MANIFESTO */}
-      <div className="manifesto"><div className="manifesto-inner">
+      <div className="manifesto" style={{ paddingBottom: '1rem', paddingTop: '3rem' }}><div className="manifesto-inner">
         <div className="manifesto-left"><ScrollReveal>
-          <div className="sec-label" style={{ marginBottom: '2rem' }}>Our Philosophy</div>
-          <p className="big-quote">&ldquo;We serve <em className="gradient-text" style={{ WebkitTextFillColor: 'transparent' }}>fewer</em> clients to serve them <em className="gradient-text" style={{ WebkitTextFillColor: 'transparent' }}>better</em>.&rdquo;</p>
-          <div className="quote-attr" style={{ marginBottom: '2.5rem' }}>— Cleo Consulting</div>
-      <div style={{ position: 'relative', display: 'inline-block' }}>
-        <div style={{ position: 'absolute', inset: '-8px', border: '1.5px solid var(--gold)', opacity: 0.4, transform: 'rotate(2deg)' }} />
-        <div className="manifesto-img" style={{ transform: 'rotate(-1deg)' }}>
-          <img src="/images/handshake.webp" alt="Partnership" style={{ filter: 'sepia(20%) saturate(120%) brightness(0.85)' }} />
+          <div className="sec-label" style={{ marginTop: '4rem', marginBottom: '1.5rem' }}>Our Philosophy</div>
+          <p className="big-quote" style={{ marginBottom: '1.5rem' }}>&ldquo;We serve <em className="gradient-text" style={{ WebkitTextFillColor: 'transparent' }}>fewer</em> clients to serve them <em className="gradient-text" style={{ WebkitTextFillColor: 'transparent' }}>better</em>.&rdquo;</p>
+          <div className="quote-attr" style={{ marginBottom: '2rem' }}>— Cleo Consulting</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '7rem', marginTop: '3.5rem' }}>
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <div style={{ position: 'absolute', inset: '-8px', border: '1.5px solid var(--gold)', opacity: 0.4, transform: 'rotate(2deg)' }} />
+          <div style={{ transform: 'rotate(-1deg)', height: '250px', overflow: 'hidden', borderRadius: '2px', position: 'relative' }}>
+            <img src="/images/handshake.webp" alt="Partnership" className="img-cover" style={{ filter: 'sepia(20%) saturate(120%) brightness(0.85)' }} />
+          </div>
         </div>
-      </div>        </ScrollReveal></div>
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <div style={{ position: 'absolute', inset: '-8px', border: '1.5px solid var(--gold)', opacity: 0.4, transform: 'rotate(-2deg)' }} />
+          <div style={{ transform: 'rotate(1deg)', height: '250px', overflow: 'hidden', borderRadius: '2px', position: 'relative' }}>
+            <img src="/images/team-meeting-overhead.webp" alt="Team" className="img-cover" style={{ filter: 'sepia(20%) saturate(120%) brightness(0.85)' }} />
+          </div>
+        </div>
+      </div>       </ScrollReveal></div>
         <div className="cards-col">
           {[
-            { num: '01', title: 'Who We Are', text: "A hardworking and dedicated IT Consulting and Recruitment firm. Built by partners with 40+ years of combined experience.", img: '/images/laptop-teamwork.webp' },
-            { num: '02', title: 'What We Do', text: "End-to-end recruitment and project delivery — IT, Finance & Accounting, Engineering. Onshore and offshore delivery models.", img: '/images/desk-bw.webp' },
-            { num: '03', title: 'Why Cleo', text: "We deliberately serve fewer clients to build stronger relationships. Higher responsiveness. Personal partner-led involvement.", img: '/images/puzzle-light.webp' },
+            { num: '01', title: 'Who We Are', text: "We are Cleo Consulting, a hardworking and dedicated IT Consulting and Recruitment firm. Cleo is being built by partners who boast a combined experience of over 200+ years in IT Consulting and Recruitment Industry. Since Cleo's inception, we have partnered with multiple clients in various industries successfully delivering projects.", img: '/images/laptop-teamwork.webp' },
+            { num: '02', title: 'What We Do', text: "We have strategic partnerships to deliver various consulting projects with both onshore and offshore delivery models. At the same time, our core business entails providing end to end recruitment services — IT, Finance & Accounting, Engineering, Customer Service, Admin Support and Sales. This allows our clients to focus on what is most important for their company while leaving their hiring needs to us.", img: '/images/desk-bw.webp' },
+            { num: '03', title: 'Why Cleo?', text: "We are not a typical projects consulting firm — we serve a limited number of clients to build strong partner relationships. This allows us to deliver a higher level of responsiveness, fewer blocking restrictions, maximum access to the market and personal, partner-led involvement on all assignments. Being small allows us to stay hungry, remain motivated and driven to excel. We are of the \"Action Speaks Louder Than Words\" school of thought.", img: '/images/puzzle-light.webp' },
           ].map(({ num, title, text, img }, i) => (
             <ScrollReveal key={num} delay={i + 1}><div className="m-card">
               <div className="m-num">{num}</div>
@@ -148,8 +156,7 @@ export default function Home() {
 
       {/* TESTIMONIAL */}
       <div className="testimonial-section">
-        <div className="testimonial-bg"><img src="/images/conference-room.webp" alt="" /></div>
-        <div className="testimonial-inner"><ScrollReveal>
+        <div className="testimonial-bg"><img src="/images/conference-room.webp" alt="" aria-hidden="true" /></div>        <div className="testimonial-inner"><ScrollReveal>
           <div className="testimonial-mark">&ldquo;</div>
           <p className="testimonial-text">Being small keeps us hungry, motivated and driven to excel. We don&rsquo;t just fill roles — we build lasting partnerships that transform how our clients find and retain talent.</p>
           <div className="testimonial-author">— Cleo Consulting Founding Partners</div>
@@ -164,7 +171,7 @@ export default function Home() {
             <ScrollReveal><div className="sec-label" style={{ marginBottom: '1.25rem' }}>Specialist Talent</div>
               <div className="talent-title-big">WE PLACE<br /><em>These</em><br />EXPERTS</div></ScrollReveal>
             <ScrollReveal delay={1}><div>
-              <p style={{ fontSize: '0.9rem', lineHeight: 1.85, color: 'var(--fog)', maxWidth: '340px', marginBottom: '1.5rem' }}>Every role filled is a relationship built. We sniff out the right fit — not just the nearest available.</p>
+              <p style={{ fontSize: '0.88rem', lineHeight: 1.8, color: 'var(--fog)', maxWidth: '340px', marginBottom: '1.5rem', letterSpacing: '0.02em', opacity: 0.85 }}>Every role filled is a relationship built. We sniff out the right fit — not just the nearest available.</p>
               <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
                 <div style={{ position: 'absolute', inset: '-8px', border: '1px solid var(--gold)', opacity: 0.4, transform: 'rotate(2deg)' }} />
                 <div style={{ height: '200px', overflow: 'hidden', borderRadius: '2px', position: 'relative' }} className="img-zoom">
@@ -227,7 +234,7 @@ export default function Home() {
 
       {/* CTA */}
       <div className="cta-sec" style={{ position: 'relative' }}>
-        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', zIndex: 0 }}><img src="/images/office-sunset.webp" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.06 }} /></div>
+        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', zIndex: 0 }}><img src="/images/office-sunset.webp" alt="" aria-hidden="true" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.06 }} /></div>
         <ScrollReveal><div className="cta-label"><div className="cta-dash" />Ready to work together<div className="cta-dash" /></div></ScrollReveal>
         <ScrollReveal delay={1}><h2 className="cta-title">LET&rsquo;S<br /><em>BUILD</em></h2></ScrollReveal>
         <ScrollReveal delay={2}><p className="cta-sub">We respond quickly and partner closely. Tell us what you need — we&rsquo;ll find the right people or build the right solution.</p></ScrollReveal>

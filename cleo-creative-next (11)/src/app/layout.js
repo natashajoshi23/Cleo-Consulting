@@ -3,6 +3,7 @@ import { ThemeProvider } from '@/components/ThemeContext'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ScrollProgress from '@/components/ScrollProgress'
+import CertificationPopup from '@/components/Certificationpopup'
 
 export const metadata = {
   title: 'Cleo Consulting — We Sniff Out the Best Talent',
@@ -14,9 +15,13 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="dark">
       <body>
         <ThemeProvider>
+          <a href="#main" className="skip-link">Skip to main content</a>
+          <CertificationPopup />
           <ScrollProgress />
           <Navbar />
-          <div className="page-wrap">{children}</div>
+          <main id="main">
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
