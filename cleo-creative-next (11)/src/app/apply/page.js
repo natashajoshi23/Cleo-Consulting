@@ -20,17 +20,23 @@ export default function ApplyPage() {
   const [fileName, setFileName] = useState('')
   const [errors, setErrors] = useState({})
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const newErrors = {}
     if (!form.name) newErrors.name = 'Name is required'
     if (!form.email) newErrors.email = 'Email is required'
     if (!form.position) newErrors.position = 'Please select a position'
+    if (!fileName) newErrors.resume = 'Resume is required'
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
       return
     }
     setErrors({})
+    await fetch('https://formspree.io/f/xojzlzol', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    })
     setSubmitted(true)
   }
 
@@ -133,14 +139,15 @@ export default function ApplyPage() {
                   </select>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  <label htmlFor="apply-resume" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Upload Resume</label>
-                  <label htmlFor="apply-resume" style={{ ...inputStyle, border: '1px dashed var(--ghost)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                  <label htmlFor="apply-resume" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Upload Resume <span aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
+                  <label htmlFor="apply-resume" style={{ ...inputStyle, border: errors.resume ? '1px dashed #e74c3c' : '1px dashed var(--ghost)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                     onMouseOver={e => e.currentTarget.style.borderColor = 'var(--gold)'}
-                    onMouseOut={e => e.currentTarget.style.borderColor = 'var(--ghost)'}
+                    onMouseOut={e => e.currentTarget.style.borderColor = errors.resume ? '#e74c3c' : 'var(--ghost)'}
                   >
                     <span style={{ color: 'var(--gold)' }}>{'\u2191'}</span> {fileName || 'Choose file (PDF, DOC)'}
-                    <input id="apply-resume" type="file" accept=".pdf,.doc,.docx" style={{ display: 'none' }} onChange={e => setFileName(e.target.files[0]?.name || '')} />
+                    <input id="apply-resume" type="file" accept=".pdf,.doc,.docx" style={{ display: 'none' }} onChange={e => { setFileName(e.target.files[0]?.name || ''); setErrors({...errors, resume: ''}) }} />
                   </label>
+                  {errors.resume && <span role="alert" style={errorStyle}>{errors.resume}</span>}
                 </div>
                 <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <label htmlFor="apply-message" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Additional Information</label>

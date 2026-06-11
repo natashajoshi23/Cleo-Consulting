@@ -8,6 +8,9 @@ import CertificationPopup from '@/components/Certificationpopup'
 export const metadata = {
   title: 'Cleo Consulting — We Sniff Out the Best Talent',
   description: 'IT Consulting and Recruitment firm operating in USA, Canada and India.',
+  icons: {
+    icon: '/icon.png',
+  },
 }
 
 export default function RootLayout({ children }) {
