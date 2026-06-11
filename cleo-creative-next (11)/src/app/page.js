@@ -73,7 +73,7 @@ export default function Home() {
               </div>
               <div className="hero-bottom">
                 <div className="hero-bottom-left">
-                  <div className="hero-stats">
+                  <div className="hero-stats" style={{ position: 'relative', zIndex: 2 }}>
                     <div className="stat"><div className="stat-n">200+</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Yrs Experience</div></div>
                     <div className="stat"><div className="stat-n">3</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Countries</div></div>
                     <div className="stat"><div className="stat-n">100%</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Partner-Led</div></div>
@@ -84,7 +84,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div style={{ position: 'relative', width: '350px', height: '100%', minHeight: '500px', marginTop: '1rem' }}>
+            <div style={{ position: 'relative', width: '350px', height: '100%', minHeight: '500px', marginTop: '1rem', zIndex: 0 }}>
               <a href="/projects" className="badge-link float-slow" style={{ textDecoration: 'none', position: 'absolute', top: '0', right: '0', textAlign: 'center' }}>
                 <RotatingBadge text="OUR PROJECTS · OUR PROJECTS · OUR PROJECTS · " img="/images/finance-tablet.webp" spacing="1.7" size="150" imgSize="100" />
                 <div style={{ fontSize: '0.7rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: '0.4rem' }}>View Projects →</div>
@@ -108,8 +108,8 @@ export default function Home() {
       </div></div>
 
       {/* CLIENTS */}
-      <div className="clients-section">
-        <div className="clients-label">Trusted Technologies & Partners</div>
+      <div className="clients-section" style={{ padding: '1rem 0' }}>
+        <div className="clients-label" style={{ paddingTop: '1.2rem' }}>Trusted Technologies & Partners</div>
         <div className="clients-track">{[...clients,...clients].map((c,i) => <div className="client-logo" key={i}><span>{c}</span></div>)}</div>
       </div>
 
