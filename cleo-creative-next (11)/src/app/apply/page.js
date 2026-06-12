@@ -1,24 +1,21 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PageBanner from '@/components/PageBanner'
-import Link from 'next/link'
-
-const categories = [
-  { area: 'Information Technology', roles: ['Program / Project Manager', 'Solutions Architect', '.NET / Java Developer', 'Business Analyst', 'Data Analyst', 'DBA / Data Warehousing', 'QA / Tester', 'UI / Web Developer', 'Cloud Computing', 'Network / System Administrator', 'Security Analyst'] },
-  { area: 'Cyber Security', roles: ['Cyber Security Consultant', 'Palo Alto Certified Engineer', 'Security Operations Analyst', 'Penetration Tester', 'Compliance Analyst'] },
-  { area: 'Cloud & Data', roles: ['Cloud Engineer (AWS / Azure / GCP)', 'Cloud Architect', 'Data Scientist', 'Data Engineer', 'Machine Learning Engineer'] },
-  { area: 'Enterprise Platforms', roles: ['Salesforce Consultant', 'ServiceNow Consultant', 'AEM Developer', 'ERP Specialist (SAP / Oracle)'] },
-  { area: 'Engineering & Design', roles: ['Mechanical Engineer', 'Civil Engineer', 'Electrical Engineer', 'Process Engineer', 'HVAC Specialist', 'Structural Engineer'] },
-  { area: 'Finance & Accounting', roles: ['Accountant', 'Financial Analyst', 'Controller', 'Payroll Specialist', 'Tax Accountant', 'Internal Auditor', 'Accounts Payable / Receivable'] },
-  { area: 'Healthcare (via Nersify)', roles: ['Registered Nurse (RN)', 'Licensed Practical Nurse (LPN)', 'Certified Nursing Assistant (CNA)', 'Nurse Practitioner'] },
-]
+import { client } from '@/sanity/client'
 
 export default function ApplyPage() {
-  const [selected, setSelected] = useState(null)
   const [form, setForm] = useState({ name: '', email: '', phone: '', position: '', experience: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [fileName, setFileName] = useState('')
   const [errors, setErrors] = useState({})
+  const [jobs, setJobs] = useState([])
+  const [selectedJob, setSelectedJob] = useState(null)
+
+  useEffect(() => {
+    client.fetch(`*[_type == "job" && isOpen == true] | order(postedAt desc) {
+      _id, jobId, title, department, location, type, description, isOpen, postedAt
+    }`).then(data => setJobs(data))
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,10 +24,7 @@ export default function ApplyPage() {
     if (!form.email) newErrors.email = 'Email is required'
     if (!form.position) newErrors.position = 'Please select a position'
     if (!fileName) newErrors.resume = 'Resume is required'
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors)
-      return
-    }
+    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return }
     setErrors({})
     await fetch('https://formspree.io/f/xojzlzol', {
       method: 'POST',
@@ -38,6 +32,13 @@ export default function ApplyPage() {
       body: JSON.stringify(form),
     })
     setSubmitted(true)
+  }
+
+  const scrollToForm = (jobTitle, jobId) => {
+    setForm(f => ({ ...f, position: `${jobTitle} (${jobId})` }))
+    setSelectedJob(null)
+    const formEl = document.getElementById('apply-form-section')
+    if (formEl) formEl.scrollIntoView({ behavior: 'smooth' })
   }
 
   const inputStyle = { padding: '0.85rem 1rem', background: 'transparent', border: '1px solid var(--ghost)', color: 'var(--paper)', fontSize: '0.9rem', outline: 'none', transition: 'border 0.2s', width: '100%' }
@@ -58,7 +59,7 @@ export default function ApplyPage() {
             {[
               { label: 'Email', value: 'careers@cleoconsult.com' },
               { label: 'Response', value: 'Within 48 Hours' },
-              { label: 'Locations', value: '6 Global Offices' },
+              { label: 'Locations', value: '3 Global Offices' },
             ].map(item => (
               <div key={item.label} style={{ textAlign: 'center' }} role="listitem">
                 <div style={{ fontSize: '0.55rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '0.3rem' }}>{item.label}</div>
@@ -68,8 +69,50 @@ export default function ApplyPage() {
           </div>
         </div>
 
-        {/* Application Form */}
+        {/* Job Listings */}
         <div style={{ marginBottom: '4rem' }}>
+          <div style={{ fontFamily: 'var(--display)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '0.5rem' }}>Opportunities</div>
+          <h3 style={{ fontFamily: 'var(--display)', fontSize: '1.8rem', color: 'var(--paper)', letterSpacing: '0.04em', marginBottom: '2rem' }}>OPEN POSITIONS</h3>
+
+          {jobs.length === 0 ? (
+            <div style={{ padding: '3rem', border: '1px solid var(--ghost)', textAlign: 'center', color: 'var(--fog)' }}>
+              No open positions at the moment. Check back soon.
+            </div>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+              {jobs.map(job => (
+                <div key={job._id}
+                  onClick={() => setSelectedJob(job)}
+                  style={{ border: '1px solid var(--ghost)', padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', cursor: 'pointer', transition: 'border-color 0.2s' }}
+                  onMouseOver={e => e.currentTarget.style.borderColor = 'var(--gold)'}
+                  onMouseOut={e => e.currentTarget.style.borderColor = 'var(--ghost)'}
+                >
+                  <div style={{ fontSize: '0.65rem', color: 'var(--fog)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    Posted {job.postedAt ? new Date(job.postedAt).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recently'} · <span style={{ color: 'var(--gold)' }}>{job.jobId}</span>
+                  </div>
+                  <h4 style={{ fontFamily: 'var(--serif)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--paper)', lineHeight: 1.3, margin: 0 }}>
+                    {job.title}
+                  </h4>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {job.type && <span style={{ fontSize: '0.6rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '0.3rem 0.75rem', border: '1px solid var(--gold)', color: 'var(--gold)' }}>{job.type}</span>}
+                    {job.department && <span style={{ fontSize: '0.6rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '0.3rem 0.75rem', border: '1px solid var(--ghost)', color: 'var(--fog)' }}>{job.department}</span>}
+                  </div>
+                  {job.location && (
+                    <div style={{ fontSize: '0.8rem', color: 'var(--fog)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      <span style={{ color: 'var(--gold)' }}>◎</span> {job.location}
+                    </div>
+                  )}
+                  <div style={{ fontSize: '0.72rem', color: 'var(--gold)', letterSpacing: '0.1em', marginTop: 'auto', paddingTop: '0.5rem' }}>
+                    View details →
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Application Form */}
+        <div id="apply-form-section" style={{ marginBottom: '4rem', scrollMarginTop: '14rem' }}>
           <div style={{ fontFamily: 'var(--display)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '0.5rem' }}>Get Started</div>
           <h3 id="apply-form-heading" style={{ fontFamily: 'var(--display)', fontSize: '1.8rem', color: 'var(--paper)', letterSpacing: '0.04em', marginBottom: '2.5rem' }}>SUBMIT YOUR APPLICATION</h3>
 
@@ -117,10 +160,10 @@ export default function ApplyPage() {
                     style={{ ...inputStyle, cursor: 'pointer', borderColor: errors.position ? '#e74c3c' : undefined }}
                   >
                     <option value="" style={{ background: 'var(--ink)' }}>Select a position</option>
-                    {categories.map(cat => (
-                      <optgroup key={cat.area} label={cat.area}>
-                        {cat.roles.map(r => <option key={r} value={r} style={{ background: 'var(--ink)' }}>{r}</option>)}
-                      </optgroup>
+                    {jobs.map(job => (
+                      <option key={job._id} value={`${job.title} (${job.jobId})`} style={{ background: 'var(--ink)' }}>
+                        {job.title} {job.jobId ? `(${job.jobId})` : ''}
+                      </option>
                     ))}
                   </select>
                   {errors.position && <span role="alert" style={errorStyle}>{errors.position}</span>}
@@ -167,50 +210,57 @@ export default function ApplyPage() {
           )}
         </div>
 
-        {/* Job Categories */}
-        <div>
-          <div style={{ fontFamily: 'var(--display)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '0.5rem' }}>Areas of Specialization</div>
-          <h3 style={{ fontFamily: 'var(--display)', fontSize: '1.8rem', color: 'var(--paper)', letterSpacing: '0.04em', marginBottom: '2rem' }}>OPEN CATEGORIES</h3>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--ghost)' }} role="list">
-            {categories.map((cat, i) => (
-              <div key={cat.area} style={{ background: 'var(--ink)' }} role="listitem">
-                <button
-                  onClick={() => setSelected(selected === i ? null : i)}
-                  aria-expanded={selected === i}
-                  aria-controls={`cat-${i}`}
-                  aria-label={`Toggle ${cat.area} - ${cat.roles.length} roles`}
-                  style={{
-                    width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    padding: '1.25rem 1.5rem', background: 'none', border: 'none', cursor: 'pointer',
-                    transition: 'background 0.2s',
-                  }}
-                  onMouseOver={e => e.currentTarget.style.background = 'rgba(200,153,31,0.04)'}
-                  onMouseOut={e => e.currentTarget.style.background = 'none'}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <span style={{ fontFamily: 'var(--display)', fontSize: '0.65rem', color: 'var(--gold)', opacity: 0.5, width: '1.5rem' }} aria-hidden="true">{'0' + (i + 1)}</span>
-                    <span style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--paper)' }}>{cat.area}</span>
-                    <span style={{ fontSize: '0.7rem', color: 'var(--fog)', opacity: 0.6 }}>{cat.roles.length} roles</span>
-                  </div>
-                  <span style={{ color: 'var(--gold)', fontSize: '1.2rem', transform: selected === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.3s' }} aria-hidden="true">+</span>
-                </button>
-                {selected === i && (
-                  <div id={`cat-${i}`} style={{ padding: '0.75rem 1.5rem 2rem 4rem' }} role="region" aria-label={`${cat.area} roles`}>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                      {cat.roles.map(r => (
-                        <span key={r} style={{
-                          fontSize: '0.78rem', padding: '0.4rem 1rem', border: '1px solid var(--ghost)',
-                          color: 'var(--fog)', borderRadius: '20px', lineHeight: 1,
-                        }}>{r}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
+        {/* Job Modal */}
+        {selectedJob && (
+          <div
+            onClick={() => setSelectedJob(null)}
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}
+          >
+            <div
+              onClick={e => e.stopPropagation()}
+              style={{ background: 'var(--ink)', border: '1px solid var(--ghost)', maxWidth: '700px', width: '100%', maxHeight: '85vh', overflowY: 'auto', padding: '3rem', position: 'relative' }}
+            >
+              <button
+                onClick={() => setSelectedJob(null)}
+                style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: 'var(--fog)', fontSize: '1.5rem', cursor: 'pointer', lineHeight: 1 }}
+              >×</button>
+              <div style={{ fontSize: '0.65rem', color: 'var(--fog)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                Posted {selectedJob.postedAt ? new Date(selectedJob.postedAt).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recently'}
               </div>
-            ))}
+              <h2 style={{ fontFamily: 'var(--serif)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--paper)', lineHeight: 1.2, marginBottom: '0.5rem' }}>
+                {selectedJob.title}
+              </h2>
+              <div style={{ fontSize: '0.65rem', color: 'var(--fog)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                Job ID: <span style={{ color: 'var(--gold)' }}>{selectedJob.jobId}</span>
+              </div>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+                {selectedJob.type && <span style={{ fontSize: '0.6rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '0.3rem 0.75rem', border: '1px solid var(--gold)', color: 'var(--gold)' }}>{selectedJob.type}</span>}
+                {selectedJob.department && <span style={{ fontSize: '0.6rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '0.3rem 0.75rem', border: '1px solid var(--ghost)', color: 'var(--fog)' }}>{selectedJob.department}</span>}
+              </div>
+              {selectedJob.location && (
+                <div style={{ fontSize: '0.85rem', color: 'var(--fog)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '2rem', paddingBottom: '2rem', borderBottom: '1px solid var(--ghost)' }}>
+                  <span style={{ color: 'var(--gold)' }}>◎</span> {selectedJob.location}
+                </div>
+              )}
+              {selectedJob.description && (
+                <div style={{ fontSize: '0.9rem', color: 'var(--fog)', lineHeight: 1.85, marginBottom: '2.5rem' }}>
+                  {selectedJob.description.map((block, i) => (
+                    <p key={i} style={{ marginBottom: '1rem' }}>
+                      {block.children?.map(child => child.text).join('')}
+                    </p>
+                  ))}
+                </div>
+              )}
+              <button
+                onClick={() => scrollToForm(selectedJob.title, selectedJob.jobId)}
+                className="btn-fill"
+                style={{ fontSize: '0.8rem', padding: '1rem 3rem', cursor: 'pointer', border: 'none' }}
+              >
+                APPLY FOR THIS ROLE
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
       </div>
     </>
