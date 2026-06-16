@@ -2,11 +2,8 @@
 import { useState } from 'react'
 import PageBanner from '@/components/PageBanner'
 const offices = [
-  { country: 'USA - Headquarters', city: 'New York', lines: '1879 Whitehaven Road, Suite C\nGrand Island, NY 14072', phone: '+1 866-390-6604', email: 'usa@cleoconsult.com' },
-  { country: 'Canada - Headquarters', city: 'Ontario', lines: '3390 South Service Rd, Suite 301 #24\nBurlington, ON L7N 3J5', phone: '+1 866-390-6604', email: 'canada@cleoconsult.com' },
-  { country: 'USA', city: 'Texas', lines: '5900 Balcones Drive Ste 100\nAustin, TX 78731', phone: '+1 866-390-6604', email: 'usa@cleoconsult.com' },
-  { country: 'USA', city: 'Virginia', lines: '1806 Summit Ave, Suite 300 #112\nRichmond, VA 23230', phone: '+1 866-390-6604', email: 'usa@cleoconsult.com' },
-  { country: 'USA', city: 'New Jersey', lines: '971 US Highway 202N, Suite R\nBranchburg, NJ 08876', phone: '+1 866-390-6604', email: 'usa@cleoconsult.com' },
+  { country: 'USA', city: 'New York', lines: '1879 Whitehaven Road, Suite C\nGrand Island, NY 14072', phone: '+1 866-390-6604', email: 'usa@cleoconsult.com' },
+  { country: 'Canada', city: 'Ontario', lines: '3390 South Service Rd, Suite 301 #24\nBurlington, ON L7N 3J5', phone: '+1 866-390-6604', email: 'canada@cleoconsult.com' },
   { country: 'India', city: 'Karnataka', lines: '#21178, Tower-21, Prestige Shantiniketan\nWhitefield Main Road, Bangalore 560048', phone: '+91 80 4333-3655', email: 'india@cleoconsult.com' },
 ]
 export default function Contact() {
@@ -22,7 +19,7 @@ export default function Contact() {
               <img src="/images/office-ny.webp" alt="Cleo Consulting New York headquarters office building" className="img-cover" style={{ objectPosition: 'center center' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }} />
               <div style={{ position: 'absolute', bottom: '1.25rem', left: '1.25rem' }}>
-                <div style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)' }}>USA Headquarters</div>
+                <div style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)' }}>USA</div>
                 <div style={{ fontFamily: 'var(--serif)', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>New York, USA</div>
               </div>
             </div>
@@ -38,7 +35,7 @@ export default function Contact() {
               <img src="/images/office-ontario.webp" alt="Cleo Consulting Ontario headquarters office building" className="img-cover" style={{ objectPosition: '20% center' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }} />
               <div style={{ position: 'absolute', bottom: '1.25rem', left: '1.25rem' }}>
-                <div style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)' }}>Canada Headquarters</div>
+                <div style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)' }}>Canada</div>
                 <div style={{ fontFamily: 'var(--serif)', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>Ontario, Canada</div>
               </div>
             </div>
@@ -50,15 +47,22 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <div className="offices-grid" style={{ marginTop: '1rem' }} role="list" aria-label="Office locations">
+        <div style={{ marginTop: '1rem' }}>
           {offices.slice(2).map(({ country, city, lines, phone, email }) => (
-            <div className="office" key={city} role="listitem">
-              <div className="office-country">{country}</div>
-              <div className="office-city">{city}</div>
-              <p>{lines.split('\n').map((l, i) => <span key={i}>{l}<br /></span>)}
-                <a href={`tel:${phone}`} aria-label={`Call ${city} office at ${phone}`}>{phone}</a><br />
-                <a href={`mailto:${email}`} aria-label={`Email ${city} office at ${email}`}>{email}</a>
-              </p>
+            <div key={city}>
+              <div style={{ height: '380px', overflow: 'hidden', borderRadius: '2px', position: 'relative', maxWidth: '600px', margin: '0 auto' }}>
+                <img src="/images/office-bangalore.webp" alt="Cleo Consulting Bangalore office building" className="img-cover" style={{ objectPosition: 'center center' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }} />
+                <div style={{ position: 'absolute', bottom: '1.25rem', left: '1.25rem' }}>
+                  <div style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)' }}>India</div>
+                  <div style={{ fontFamily: 'var(--serif)', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>{city}, {country}</div>
+                </div>
+              </div>
+              <div style={{ maxWidth: '600px', margin: '1rem auto 0', color: 'var(--paper)', fontSize: '0.9rem', lineHeight: 1.7, borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1rem', textAlign: 'center' }}>
+                <div>{lines.split('\n').map((l, i) => <span key={i}>{l}<br /></span>)}</div>
+                <a href={`tel:${phone}`} style={{ color: 'var(--paper)' }} aria-label={`Call ${city} office at ${phone}`}>{phone}</a><br />
+                <a href={`mailto:${email}`} style={{ color: 'var(--gold)' }} aria-label={`Email ${city} office at ${email}`}>{email}</a>
+              </div>
             </div>
           ))}
         </div>

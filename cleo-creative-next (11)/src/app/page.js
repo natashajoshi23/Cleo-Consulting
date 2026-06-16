@@ -74,7 +74,7 @@ export default function Home() {
               <div className="hero-bottom">
                 <div className="hero-bottom-left">
                   <div className="hero-stats" style={{ position: 'relative', zIndex: 2 }}>
-                    <div className="stat"><div className="stat-n">200+</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Yrs Experience</div></div>
+                    <div className="stat"><div className="stat-n">2013</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Year Founded</div></div>
                     <div className="stat"><div className="stat-n">3</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Countries</div></div>
                     <div className="stat"><div className="stat-n">100%</div><div className="stat-l" style={{ color: 'var(--paper)', opacity: 0.7 }}>Partner-Led</div></div>
                   </div>
@@ -84,18 +84,18 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div style={{ position: 'relative', width: '350px', height: '100%', minHeight: '500px', marginTop: '1rem', zIndex: 0 }}>
+            <div style={{ position: 'relative', width: '350px', height: '100%', minHeight: '500px', marginTop: '0rem', zIndex: 0 }}>
               <a href="/projects" className="badge-link float-slow" style={{ textDecoration: 'none', position: 'absolute', top: '0', right: '0', textAlign: 'center' }}>
-                <RotatingBadge text="OUR PROJECTS · OUR PROJECTS · OUR PROJECTS · " img="/images/finance-tablet.webp" spacing="1.7" size="150" imgSize="100" />
-                <div style={{ fontSize: '0.7rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: '0.4rem' }}>View Projects →</div>
+                <RotatingBadge text="OUR PROJECTS · OUR PROJECTS · OUR PROJECTS · " img="/images/finance-tablet.webp" spacing="1.7" size="170" imgSize="120" />
+                <div style={{ fontSize: '1rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: '0.4rem' }}>View Projects →</div>
               </a>
-              <a href="/managed-services" className="badge-link float-med" style={{ textDecoration: 'none', position: 'absolute', top: '180px', right: '120px', textAlign: 'center' }}>
-                <RotatingBadge text="IT STAFFING · IT STAFFING · IT STAFFING · IT STAFFING · " img="/images/code-python.webp" spacing="1" size="210" imgSize="140" />
-                <div style={{ fontSize: '0.8rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: '0.4rem' }}>Our Services →</div>
+              <a href="/managed-services" className="badge-link float-med" style={{ textDecoration: 'none', position: 'absolute', top: '150px', right: '200px', textAlign: 'center' }}>
+                <RotatingBadge text="IT STAFFING · IT STAFFING · IT STAFFING · IT STAFFING · " img="/images/code-python.webp" spacing="1" size="260" imgSize="180" />
+                <div style={{ fontSize: '1rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: '0.4rem' }}>Our Services →</div>
               </a>
-              <a href="/health-services" className="badge-link float-slow" style={{ textDecoration: 'none', position: 'absolute', top: '390px', right: '-70px', textAlign: 'center' }}>
-                <RotatingBadge text="HEALTH SERVICES · HEALTH SERVICES · HEALTH SERVICES · " img="/images/nurse-scrubs.webp" spacing="0.7" size="160" imgSize="110" />
-                <div style={{ fontSize: '0.7rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: '0.4rem' }}>Learn More →</div>
+              <a href="/health-services" className="badge-link float-slow" style={{ textDecoration: 'none', position: 'absolute', top: '400px', right: '-10px', textAlign: 'center' }}>
+                <RotatingBadge text="HEALTH SERVICES · HEALTH SERVICES · HEALTH SERVICES · " img="/images/nurse-scrubs.webp" spacing="0.7" size="200" imgSize="140" />
+                <div style={{ fontSize: '1rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: '0.4rem' }}>Learn More →</div>
               </a>
             </div>
           </div>
@@ -114,12 +114,12 @@ export default function Home() {
       </div>
 
       {/* MANIFESTO */}
-      <div className="manifesto" style={{ paddingBottom: '1rem', paddingTop: '3rem' }}><div className="manifesto-inner">
+      <div className="manifesto" style={{ paddingBottom: '1rem', paddingTop: '1rem' }}><div className="manifesto-inner">
         <div className="manifesto-left"><ScrollReveal>
           <div className="sec-label" style={{ marginTop: '4rem', marginBottom: '1.5rem' }}>Our Philosophy</div>
-          <p className="big-quote" style={{ marginBottom: '1.5rem' }}>&ldquo;We serve <em className="gradient-text" style={{ WebkitTextFillColor: 'transparent' }}>fewer</em> clients to serve them <em className="gradient-text" style={{ WebkitTextFillColor: 'transparent' }}>better</em>.&rdquo;</p>
+          <p className="big-quote" style={{ marginBottom: '1.5rem' }}>&ldquo;Every role filled is <em className="gradient-text" style={{ WebkitTextFillColor: 'transparent' }}>a relationship</em> built. We sniff out the <em className="gradient-text" style={{ WebkitTextFillColor: 'transparent' }}>right talent</em>— not just the nearest available.&rdquo;</p>
           <div className="quote-attr" style={{ marginBottom: '2rem' }}>— Cleo Consulting</div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '7rem', marginTop: '3.5rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem', marginTop: '3.5rem' }}>
         <div style={{ position: 'relative', display: 'inline-block' }}>
           <div style={{ position: 'absolute', inset: '-8px', border: '1.5px solid var(--gold)', opacity: 0.4, transform: 'rotate(2deg)' }} />
           <div style={{ transform: 'rotate(-1deg)', height: '250px', overflow: 'hidden', borderRadius: '2px', position: 'relative' }}>
@@ -171,10 +171,10 @@ export default function Home() {
             <ScrollReveal><div className="sec-label" style={{ marginBottom: '1.25rem' }}>Specialist Talent</div>
               <div className="talent-title-big">WE PLACE<br /><em>These</em><br />EXPERTS</div></ScrollReveal>
             <ScrollReveal delay={1}><div>
-              <p style={{ fontSize: '0.88rem', lineHeight: 1.8, color: 'var(--fog)', maxWidth: '340px', marginBottom: '1.5rem', letterSpacing: '0.02em', opacity: 0.85 }}>Every role filled is a relationship built. We sniff out the right fit — not just the nearest available.</p>
+              <p style={{ fontSize: '0.88rem', lineHeight: 1.8, color: 'var(--fog)', maxWidth: '340px', marginBottom: '1.5rem', letterSpacing: '0.02em', opacity: 0.85 }}></p>
               <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
                 <div style={{ position: 'absolute', inset: '-8px', border: '1px solid var(--gold)', opacity: 0.4, transform: 'rotate(2deg)' }} />
-                <div style={{ height: '200px', overflow: 'hidden', borderRadius: '2px', position: 'relative' }} className="img-zoom">
+                <div style={{ height: '250px', overflow: 'hidden', borderRadius: '2px', position: 'relative' }} className="img-zoom">
                   <img src="/images/team-fistbump.webp" alt="Team" className="img-cover" style={{ filter: 'sepia(30%) saturate(130%) brightness(0.75)', objectPosition: 'center 32%' }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(200,153,31,0.12), rgba(0,18,41,0.4))', pointerEvents: 'none' }} />
                 </div>
@@ -190,13 +190,13 @@ export default function Home() {
         </div>
       </div>
 
-      {/* NUMBERS */}
+      {/* NUMBERS
       <ScrollReveal><div className="numbers"><div className="numbers-inner">
-        <div className="num-item"><div className="num-val"><AnimatedCounter end="6" /></div><div className="num-label">Global Office Locations</div></div>
+        <div className="num-item"><div className="num-val"><AnimatedCounter end="3" /></div><div className="num-label">Global Office Locations</div></div>
         <div className="num-item"><div className="num-val"><AnimatedCounter end="20" suffix="K+" /></div><div className="num-label">Nersify Professionals</div></div>
         <div className="num-item"><div className="num-val"><AnimatedCounter end="10" suffix="+" /></div><div className="num-label">Specialist Disciplines</div></div>
         <div className="num-item"><div className="num-val"><AnimatedCounter end="98" suffix="%" /></div><div className="num-label">Client Retention Rate</div></div>
-      </div></div></ScrollReveal>
+      </div></div></ScrollReveal> */}
 
       {/* SPLIT HEALTH */}
       <div className="split-section">
