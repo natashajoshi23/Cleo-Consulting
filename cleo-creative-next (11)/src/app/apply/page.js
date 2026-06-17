@@ -1,7 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
 import PageBanner from '@/components/PageBanner'
-import { client } from '@/sanity/client'
+import { client } from '@/sanity/lib/client'
+import { PortableText } from '@portabletext/react'
 
 export default function ApplyPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', position: '', experience: '', message: '' })
@@ -14,7 +15,9 @@ export default function ApplyPage() {
   useEffect(() => {
     client.fetch(`*[_type == "job" && isOpen == true] | order(postedAt desc) {
       _id, jobId, title, department, location, type, description, isOpen, postedAt
-    }`).then(data => setJobs(data))
+    }`).then(data => {
+      setJobs(data)
+    }).catch(err => console.error('Sanity error:', err))
   }, [])
 
   const handleSubmit = async (e) => {
@@ -26,12 +29,22 @@ export default function ApplyPage() {
     if (!fileName) newErrors.resume = 'Resume is required'
     if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return }
     setErrors({})
-    await fetch('https://formspree.io/f/xojzlzol', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    })
-    setSubmitted(true)
+
+    const data = new FormData(e.target)
+
+    try {
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        body: data,
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        console.error('Submission failed:', await res.text())
+      }
+    } catch (err) {
+      console.error('Fetch error:', err)
+    }
   }
 
   const scrollToForm = (jobTitle, jobId) => {
@@ -57,7 +70,6 @@ export default function ApplyPage() {
           </div>
           <div style={{ display: 'flex', gap: '2rem', flexShrink: 0 }} role="list" aria-label="Contact information">
             {[
-              { label: 'Email', value: 'careers@cleoconsult.com' },
               { label: 'Response', value: 'Within 48 Hours' },
               { label: 'Locations', value: '3 Global Offices' },
             ].map(item => (
@@ -126,7 +138,7 @@ export default function ApplyPage() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <label htmlFor="apply-name" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Full Name <span aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="apply-name" type="text" required aria-required="true" value={form.name}
+                  <input id="apply-name" name="name" type="text" required aria-required="true" value={form.name}
                     onChange={e => { setForm({...form, name: e.target.value}); setErrors({...errors, name: ''}) }}
                     style={{ ...inputStyle, borderColor: errors.name ? '#e74c3c' : undefined }}
                     onFocus={e => e.target.style.borderColor = 'var(--gold)'}
@@ -136,7 +148,7 @@ export default function ApplyPage() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <label htmlFor="apply-email" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Email Address <span aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <input id="apply-email" type="email" required aria-required="true" value={form.email}
+                  <input id="apply-email" name="email" type="email" required aria-required="true" value={form.email}
                     onChange={e => { setForm({...form, email: e.target.value}); setErrors({...errors, email: ''}) }}
                     style={{ ...inputStyle, borderColor: errors.email ? '#e74c3c' : undefined }}
                     onFocus={e => e.target.style.borderColor = 'var(--gold)'}
@@ -146,7 +158,7 @@ export default function ApplyPage() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <label htmlFor="apply-phone" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Phone Number</label>
-                  <input id="apply-phone" type="tel" value={form.phone}
+                  <input id="apply-phone" name="phone" type="tel" value={form.phone}
                     onChange={e => setForm({...form, phone: e.target.value})}
                     style={inputStyle}
                     onFocus={e => e.target.style.borderColor = 'var(--gold)'}
@@ -155,9 +167,9 @@ export default function ApplyPage() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <label htmlFor="apply-position" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Position of Interest <span aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
-                  <select id="apply-position" required aria-required="true" value={form.position}
+                  <select id="apply-position" name="position" required aria-required="true" value={form.position}
                     onChange={e => { setForm({...form, position: e.target.value}); setErrors({...errors, position: ''}) }}
-                    style={{ ...inputStyle, cursor: 'pointer', borderColor: errors.position ? '#e74c3c' : undefined }}
+                    style={{ ...inputStyle, cursor: 'pointer', borderColor: errors.position ? '#e74c3c' : undefined}}
                   >
                     <option value="" style={{ background: 'var(--ink)' }}>Select a position</option>
                     {jobs.map(job => (
@@ -170,7 +182,7 @@ export default function ApplyPage() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <label htmlFor="apply-experience" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Years of Experience</label>
-                  <select id="apply-experience" value={form.experience}
+                  <select id="apply-experience" name="experience" value={form.experience}
                     onChange={e => setForm({...form, experience: e.target.value})}
                     style={{ ...inputStyle, cursor: 'pointer' }}
                   >
@@ -188,13 +200,13 @@ export default function ApplyPage() {
                     onMouseOut={e => e.currentTarget.style.borderColor = errors.resume ? '#e74c3c' : 'var(--ghost)'}
                   >
                     <span style={{ color: 'var(--gold)' }}>{'\u2191'}</span> {fileName || 'Choose file (PDF, DOC)'}
-                    <input id="apply-resume" type="file" accept=".pdf,.doc,.docx" style={{ display: 'none' }} onChange={e => { setFileName(e.target.files[0]?.name || ''); setErrors({...errors, resume: ''}) }} />
+                    <input id="apply-resume" name="Resume Upload" type="file" accept=".pdf,.doc,.docx" style={{ display: 'none' }} onChange={e => { setFileName(e.target.files[0]?.name || ''); setErrors({...errors, resume: ''}) }} />
                   </label>
                   {errors.resume && <span role="alert" style={errorStyle}>{errors.resume}</span>}
                 </div>
                 <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <label htmlFor="apply-message" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Additional Information</label>
-                  <textarea id="apply-message" rows={3} value={form.message}
+                  <textarea id="apply-message" name="message" rows={3} value={form.message}
                     onChange={e => setForm({...form, message: e.target.value})}
                     placeholder="Tell us about your background, availability, and what you're looking for..."
                     style={{ ...inputStyle, resize: 'vertical', fontFamily: 'inherit' }}
@@ -243,12 +255,8 @@ export default function ApplyPage() {
                 </div>
               )}
               {selectedJob.description && (
-                <div style={{ fontSize: '0.9rem', color: 'var(--fog)', lineHeight: 1.85, marginBottom: '2.5rem' }}>
-                  {selectedJob.description.map((block, i) => (
-                    <p key={i} style={{ marginBottom: '1rem' }}>
-                      {block.children?.map(child => child.text).join('')}
-                    </p>
-                  ))}
+                <div className="pg-body" style={{ fontSize: '0.9rem', color: 'var(--fog)', lineHeight: 1.85, paddingTop: 0, marginTop: 0, paddingBottom: 0, marginBottom: '4rem' }}>
+                  <PortableText value={selectedJob.description} />
                 </div>
               )}
               <button

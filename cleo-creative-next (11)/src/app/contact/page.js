@@ -72,7 +72,23 @@ export default function Contact() {
           {sent ? (
             <div style={{ background: 'rgba(200,153,31,0.1)', border: '1px solid var(--gold)', padding: '1.5rem', color: 'var(--paper)', fontWeight: 600 }} role="alert">Thank you! We will be in touch shortly.</div>
           ) : (
-            <form onSubmit={async e => { e.preventDefault(); try { const data = new FormData(e.target); await fetch('https://formspree.io/f/xeewlwqw', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } }); setSent(true) } catch (err) { setSent(true) } }} aria-labelledby="contact-form-heading">
+            <form onSubmit={async e => {
+              e.preventDefault()
+              const data = new FormData(e.target)
+              await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  firstName: data.get('firstName'),
+                  lastName:  data.get('lastName'),
+                  email:     data.get('email'),
+                  phone:     data.get('phone'),
+                  service:   data.get('service'),
+                  message:   data.get('message'),
+                })
+              })
+              setSent(true)
+            }} aria-labelledby="contact-form-heading">
               <div className="cf-row">
                 <div className="fg"><label htmlFor="contact-fname">First Name *</label><input id="contact-fname" name="firstName" type="text" placeholder="Your first name" aria-required="true" required /></div>
                 <div className="fg"><label htmlFor="contact-lname">Last Name</label><input id="contact-lname" name="lastName" type="text" placeholder="Your last name" /></div>
