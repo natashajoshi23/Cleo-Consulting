@@ -211,7 +211,7 @@ textarea:focus {
 .theme-toggle:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(200,153,31,0.6)}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 3rem;height:170px;transition:background 0.5s,backdrop-filter 0.5s}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 3rem;height:170px;transition:background 0.5s,backdrop-filter 0.5s;overflow:visible}
 nav.scrolled{background:rgba(0,18,41,0.92);backdrop-filter:blur(16px)}
 .nav-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
 
@@ -846,4 +846,252 @@ textarea:focus-visible,
   margin: 2rem 0;
   color: var(--fog);
   font-style: italic;
+}
+
+/* ══════════════ MOBILE RESPONSIVE ══════════════ */
+
+.nav-mobile-controls { display: none !important; }
+
+@media (max-width: 900px) {
+
+  /* ── Nav ── */
+  nav {
+    height: 90px !important;
+    padding: 0 1.25rem !important;
+  }
+  .nav-links { display: none !important; }
+  .nav-mobile-controls {
+    display: flex !important;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .nav-logo img {
+    height: 75px !important;
+    width: auto !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+  }
+  .hamburger {
+    background: none;
+    border: 1px solid var(--ghost);
+    border-radius: 4px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--fog);
+    flex-shrink: 0;
+  }
+
+  /* ── Mobile drawer ── */
+  .mobile-menu {
+    position: fixed;
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--ink) !important;
+    z-index: 9999 !important;
+    overflow-y: auto;
+    border-top: 1px solid var(--ghost);
+    padding-bottom: 3rem;
+  }
+  .mobile-link {
+    display: block;
+    padding: 1.1rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--ghost);
+    color: var(--fog);
+    transition: color 0.2s, padding-left 0.2s;
+  }
+  .mobile-link:hover { color: var(--gold); padding-left: 2rem; }
+  .mobile-link-label {
+    display: block;
+    padding: 1rem 1.5rem 0.4rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .mobile-sub-link {
+    display: block;
+    padding: 0.85rem 2.75rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--fog);
+    transition: color 0.2s;
+    border-bottom: 1px solid var(--ghost);
+  }
+  .mobile-sub-link:hover { color: var(--gold); }
+  .mobile-link-group { }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 110px 0 3rem;
+    min-height: auto;
+  }
+  .hero-content { padding: 0 1.25rem; }
+  .hero-content > div {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+  .hero-title { font-size: clamp(2.8rem, 12vw, 5rem); }
+  .hero-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
+  }
+  .hero-stats { gap: 1.5rem; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns a { text-align: center; }
+
+  /* ── Inner banner ── */
+  .inner-banner {
+    margin-top: 130px !important;
+    padding: 3rem 1.25rem 2.5rem;
+    min-height: auto;
+  }
+  .banner-h1 { font-size: clamp(2.5rem, 10vw, 4rem) !important; }
+
+  /* ── Manifesto ── */
+  .manifesto { padding: 4rem 1.25rem; }
+  .manifesto-inner { grid-template-columns: 1fr; gap: 3rem; }
+
+  /* ── Services ── */
+  .services-sec { padding: 4rem 0; }
+  .services-inner { padding: 0 1.25rem; }
+  .services-hdr { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  .svcs-grid { grid-template-columns: 1fr; }
+
+  /* ── Talent ── */
+  .talent-sec { padding: 4rem 1.25rem 3rem; }
+  .talent-hdr { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+
+  /* ── Numbers ── */
+  .numbers-inner { grid-template-columns: 1fr 1fr; }
+  .num-item::after { display: none; }
+
+  /* ── Health ── */
+  .health-sec { padding: 4rem 1.25rem; }
+  .health-inner { grid-template-columns: 1fr; gap: 3rem; }
+
+  /* ── Split section ── */
+  .split-section { grid-template-columns: 1fr; min-height: auto; }
+  .split-left { height: 280px; position: relative; }
+  .split-right { padding: 2.5rem 1.25rem; }
+
+  /* ── Projects ── */
+  .projects-sec { padding: 4rem 1.25rem; }
+  .projects-inner { padding: 0; }
+  .projects-hdr { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
+  .proj-grid { grid-template-columns: 1fr; }
+
+  /* ── CTA ── */
+  .cta-sec { padding: 5rem 1.25rem; }
+  .cta-title { font-size: clamp(3.5rem, 15vw, 8rem); }
+  .cta-btns { flex-direction: column; align-items: stretch; }
+  .cta-btns a { text-align: center; }
+
+  /* ── Footer ── */
+  footer { padding: 4rem 1.25rem 2rem; }
+  .ft-top { grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+  .ft-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+
+  /* ── Inner page grids ── */
+  .two-col-grid, .ap-grid, .offices-grid,
+  .csr-imgs, .health-pg-grid, .why-grid,
+  .three-col-grid, .blog-grid { grid-template-columns: 1fr; }
+  .pg-body { padding: 3rem 1.25rem; }
+
+  /* ── Team ── */
+  .tm, .tm:nth-child(even) { grid-template-columns: 1fr; gap: 1.5rem; }
+  .tm:nth-child(even) .tm-photo,
+  .tm:nth-child(even) .tm-info { order: unset; }
+  .tm-photo { width: 140px; height: 140px; font-size: 2.5rem; }
+
+  /* ── Contact ── */
+  .cf-row { grid-template-columns: 1fr; }
+  .contact-form-sec { padding: 2rem 1.25rem; margin-top: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(2.4rem, 13vw, 3.5rem); }
+  .stat-n { font-size: 2rem; }
+  .hero-stats { gap: 1rem; }
+  .btn-fill, .btn-ghost-btn { padding: 0.85rem 1.5rem; font-size: 0.7rem; }
+  .num-val { font-size: clamp(2.5rem, 10vw, 4rem); }
+}
+/* ══ MOBILE DRAWER FIX ══ */
+@media (max-width: 900px) {
+  nav {
+    overflow: visible !important;
+  }
+
+  /* The desktop about dropdown leaking through — kill it */
+  nav > ul {
+    display: none !important;
+  }
+
+  /* Mobile drawer must cover everything */
+  .mobile-menu {
+    position: fixed !important;
+    top: 90px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    background: #001229 !important;
+    z-index: 9999 !important;
+    overflow-y: auto !important;
+    border-top: 1px solid rgba(245,237,230,0.1) !important;
+  }
+
+  /* Logo bigger on mobile */
+  .nav-logo img {
+    height: 90px !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+}
+
+.hero-badge-panel { display: none; }
+
+@media (min-width: 901px) {
+  .hero-badge-panel { display: block; }
+}
+[data-theme="light"] nav.scrolled {
+  border-bottom: 1px solid rgba(0, 18, 41, 0.08);
+}
+
+.nersify-logo {
+  height: 130px;
+  width: auto;
+  object-fit: contain;
+  margin-left: auto;
+  opacity: 0.85;
+  margin-top: -2rem;
+}
+
+@media (max-width: 900px) {
+  .nersify-logo {
+    height: 110px;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  nav {
+    height: 135px !important;
+  }
+  .mobile-menu, [style*="top: '80px'"] {
+    top: 110px !important;
+  }
 }

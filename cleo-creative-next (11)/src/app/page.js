@@ -84,7 +84,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div style={{ position: 'relative', width: '350px', height: '100%', minHeight: '500px', marginTop: '0rem', zIndex: 0 }}>
+            <div className="hero-badge-panel" style={{ position: 'relative', width: '350px', height: '100%', minHeight: '500px', marginTop: '0rem', zIndex: 0 }}>
               <a href="/projects" className="badge-link float-slow" style={{ textDecoration: 'none', position: 'absolute', top: '0', right: '0', textAlign: 'center' }}>
                 <RotatingBadge text="OUR PROJECTS · OUR PROJECTS · OUR PROJECTS · " img="/images/finance-tablet.webp" spacing="1.7" size="170" imgSize="120" />
                 <div style={{ fontSize: '1rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: '0.4rem' }}>View Projects →</div>

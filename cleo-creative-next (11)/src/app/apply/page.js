@@ -55,29 +55,35 @@ export default function ApplyPage() {
   }
 
   const inputStyle = { padding: '0.85rem 1rem', background: 'transparent', border: '1px solid var(--ghost)', color: 'var(--paper)', fontSize: '0.9rem', outline: 'none', transition: 'border 0.2s', width: '100%' }
+  const selectStyle = { ...inputStyle, paddingRight: '2.25rem' }
   const errorStyle = { color: '#e74c3c', fontSize: '0.7rem', marginTop: '0.25rem' }
 
   return (
     <>
+      {/* Scoped fix: prevent native select text from colliding with the browser's built-in dropdown arrow on mobile */}
+      <style jsx global>{`
+        @media (max-width: 640px) {
+          .apply-select {
+            font-size: 0.8rem;
+            padding-right: 2.25rem !important;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          .apply-select option {
+            font-size: 0.9rem;
+          }
+        }
+      `}</style>
+
       <PageBanner eyebrow="Careers" title="APPLY<br>NOW" num="09" bgImage="/images/handshake.webp" />
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 2rem 5rem' }}>
 
         {/* Intro bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', paddingBottom: '2rem', borderBottom: '1px solid var(--ghost)' }}>
-          <div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '3rem', paddingBottom: '2rem', borderBottom: '1px solid var(--ghost)', textAlign: 'center' }}>
+          <div style={{ maxWidth: '700px', margin: '0 auto' }}>
             <h2 style={{ fontFamily: 'var(--serif)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--paper)', lineHeight: 1.3 }}>Join the Cleo <span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Network</span></h2>
-            <p style={{ fontSize: '0.95rem', color: 'var(--fog)', lineHeight: 1.85, maxWidth: '600px', marginTop: '0.75rem' }}>Whether you are seeking a permanent role, contract opportunity, or project-based engagement, Cleo Consulting connects top-tier talent with industry-leading organizations across the USA, Canada, and India.</p>
-          </div>
-          <div style={{ display: 'flex', gap: '2rem', flexShrink: 0 }} role="list" aria-label="Contact information">
-            {[
-              { label: 'Response', value: 'Within 48 Hours' },
-              { label: 'Locations', value: '3 Global Offices' },
-            ].map(item => (
-              <div key={item.label} style={{ textAlign: 'center' }} role="listitem">
-                <div style={{ fontSize: '0.55rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '0.3rem' }}>{item.label}</div>
-                <div style={{ fontFamily: 'var(--serif)', fontSize: '0.85rem', fontWeight: 700, color: 'var(--paper)' }}>{item.value}</div>
-              </div>
-            ))}
+            <p style={{ fontSize: '0.95rem', color: 'var(--fog)', lineHeight: 1.85, marginTop: '0.75rem', marginLeft: 'auto', marginRight: 'auto' }}>Whether you are seeking a permanent role, contract opportunity, or project-based engagement, Cleo Consulting connects top-tier talent with industry-leading organizations across the USA, Canada, and India.</p>
           </div>
         </div>
 
@@ -169,7 +175,8 @@ export default function ApplyPage() {
                   <label htmlFor="apply-position" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Position of Interest <span aria-hidden="true">*</span><span className="sr-only">(required)</span></label>
                   <select id="apply-position" name="position" required aria-required="true" value={form.position}
                     onChange={e => { setForm({...form, position: e.target.value}); setErrors({...errors, position: ''}) }}
-                    style={{ ...inputStyle, cursor: 'pointer', borderColor: errors.position ? '#e74c3c' : undefined}}
+                    className="apply-select"
+                    style={{ ...selectStyle, cursor: 'pointer', borderColor: errors.position ? '#e74c3c' : undefined}}
                   >
                     <option value="" style={{ background: 'var(--ink)' }}>Select a position</option>
                     {jobs.map(job => (
@@ -184,7 +191,8 @@ export default function ApplyPage() {
                   <label htmlFor="apply-experience" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--fog)' }}>Years of Experience</label>
                   <select id="apply-experience" name="experience" value={form.experience}
                     onChange={e => setForm({...form, experience: e.target.value})}
-                    style={{ ...inputStyle, cursor: 'pointer' }}
+                    className="apply-select"
+                    style={{ ...selectStyle, cursor: 'pointer' }}
                   >
                     <option value="" style={{ background: 'var(--ink)' }}>Select</option>
                     <option value="0-2" style={{ background: 'var(--ink)' }}>0 - 2 years</option>

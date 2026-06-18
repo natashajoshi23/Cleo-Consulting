@@ -9,11 +9,21 @@ const offices = [
 export default function Contact() {
   const [sent, setSent] = useState(false)
   return (
-    <>
+    <div className="contact-page">
+      {/* Mobile-only: stack the USA/Canada office grid into a single column */}
+      <style jsx global>{`
+        @media (max-width: 640px) {
+          .offices-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
+        }
+      `}</style>
+
       <PageBanner eyebrow="Reach Out" title="LET'S<br>TALK" num="08" bgImage="/images/conference-room.webp" />
-      <div className="pg-body">
-        <h2 style={{ fontFamily: 'var(--display)', fontSize: '2rem', color: 'var(--paper)', letterSpacing: '0.04em', marginBottom: '1.1rem' }}>OUR OFFICES</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2.5rem' }}>
+      <div className="pg-body" style={{ paddingTop: '1rem' }}>
+        <h2 style={{ fontFamily: 'var(--display)', fontSize: '2rem', color: 'var(--paper)', letterSpacing: '0.04em', marginBottom: '-2rem' }}>OUR OFFICES</h2>
+        <div className="offices-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2.5rem', background: 'transparent' }}>
           <div>
             <div style={{ height: '380px', overflow: 'hidden', borderRadius: '2px', position: 'relative' }}>
               <img src="/images/office-ny.webp" alt="Cleo Consulting New York headquarters office building" className="img-cover" style={{ objectPosition: 'center center' }} />
@@ -23,7 +33,7 @@ export default function Contact() {
                 <div style={{ fontFamily: 'var(--serif)', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>New York, USA</div>
               </div>
             </div>
-            <div style={{ marginTop: '1rem', color: 'var(--paper)', fontSize: '0.9rem', lineHeight: 1.7, borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1rem' }}>
+            <div style={{ marginTop: '1rem', color: 'var(--paper)', fontSize: '0.9rem', lineHeight: 1.7, borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1rem', background: 'transparent' }}>
               <div>1879 Whitehaven Road, Suite C</div>
               <div>Grand Island, NY 14072</div>
               <a href="tel:+18663906604" style={{ color: 'var(--paper)' }} aria-label="Call New York office at +1 866-390-6604">+1 866-390-6604</a><br />
@@ -39,7 +49,7 @@ export default function Contact() {
                 <div style={{ fontFamily: 'var(--serif)', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>Ontario, Canada</div>
               </div>
             </div>
-            <div style={{ marginTop: '1rem', color: 'var(--paper)', fontSize: '0.9rem', lineHeight: 1.7, borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1rem' }}>
+            <div style={{ marginTop: '1rem', color: 'var(--paper)', fontSize: '0.9rem', lineHeight: 1.7, borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1rem', background: 'transparent' }}>
               <div>3390 South Service Rd, Suite 301 #24</div>
               <div>Burlington, ON L7N 3J5</div>
               <a href="tel:+18663906604" style={{ color: 'var(--paper)' }} aria-label="Call Ontario office at +1 866-390-6604">+1 866-390-6604</a><br />
@@ -50,7 +60,7 @@ export default function Contact() {
         <div style={{ marginTop: '1rem' }}>
           {offices.slice(2).map(({ country, city, lines, phone, email }) => (
             <div key={city}>
-              <div style={{ height: '380px', overflow: 'hidden', borderRadius: '2px', position: 'relative', maxWidth: '600px', margin: '0 auto' }}>
+              <div style={{ height: '380px', overflow: 'hidden', borderRadius: '2px', position: 'relative', maxWidth: '600px', margin: '0 auto' }} className="india-office-img">
                 <img src="/images/office-bangalore.webp" alt="Cleo Consulting Bangalore office building" className="img-cover" style={{ objectPosition: 'center center' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }} />
                 <div style={{ position: 'absolute', bottom: '1.25rem', left: '1.25rem' }}>
@@ -58,7 +68,7 @@ export default function Contact() {
                   <div style={{ fontFamily: 'var(--serif)', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>{city}, {country}</div>
                 </div>
               </div>
-              <div style={{ maxWidth: '600px', margin: '1rem auto 0', color: 'var(--paper)', fontSize: '0.9rem', lineHeight: 1.7, borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1rem', textAlign: 'center' }}>
+              <div className="india-office-text" style={{ maxWidth: '600px', margin: '1rem auto 0', color: 'var(--paper)', fontSize: '0.9rem', lineHeight: 1.7, borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '1rem', textAlign: 'center' }}>
                 <div>{lines.split('\n').map((l, i) => <span key={i}>{l}<br /></span>)}</div>
                 <a href={`tel:${phone}`} style={{ color: 'var(--paper)' }} aria-label={`Call ${city} office at ${phone}`}>{phone}</a><br />
                 <a href={`mailto:${email}`} style={{ color: 'var(--gold)' }} aria-label={`Email ${city} office at ${email}`}>{email}</a>
@@ -107,6 +117,6 @@ export default function Contact() {
           )}
         </div>
       </div>
-    </>
+    </div>
   )
 }

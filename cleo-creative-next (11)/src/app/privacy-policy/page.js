@@ -56,7 +56,6 @@
 //         <div style={{ background: 'var(--ink2)', borderLeft: '3px solid var(--gold)', padding: '2rem', marginTop: '1rem', maxWidth: '500px' }}>
 //           <p style={{ fontSize: '0.9rem', color: 'var(--paper)', fontWeight: 600, marginBottom: '0.5rem' }}>Cleo Consulting Inc.</p>
 //           <p style={{ fontSize: '0.85rem', color: 'var(--fog)', lineHeight: 1.85 }}>
-//             Email: <a href="mailto:info@cleoconsult.com" style={{ color: 'var(--gold)', textDecoration: 'none' }}>info@cleoconsult.com</a><br />
 //             Phone: <a href="tel:+18663906604" style={{ color: 'var(--gold)', textDecoration: 'none' }}>+1 866-390-6604</a><br />
 //             1879 Whitehaven Road, Suite C<br />
 //             Grand Island, NY 14072

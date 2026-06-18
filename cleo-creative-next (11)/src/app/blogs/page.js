@@ -22,7 +22,7 @@ export default async function Blogs() {
   return (
     <>
       <PageBanner eyebrow="Insights" title="LATEST<br>THINKING" num="07" bgImage="/images/business-newspaper.webp" />
-      <div className="pg-body" style={{ paddingTop: '2.5rem' }}>
+      <div className="pg-body" style={{ paddingTop: '0rem' }}>
         <div className="blog-grid">
           {posts.map(({ publishedAt, title, excerpt, img, slug }) => (
             <Link href={"/blogs/" + slug} className="blog" key={slug} style={{ textDecoration: 'none' }}>

@@ -35,7 +35,6 @@ export default function Footer() {
               <ul className="ft-links">
                 <li><Link href="/contact">Contact Us</Link></li>
                 <li><Link href="/contact">Our Offices</Link></li>
-                <li><a href="mailto:info@cleoconsult.com">info@cleoconsult.com</a></li>
                 <li><a href="https://www.linkedin.com/company/cleo-consulting-inc-/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
               </ul>
             </div>

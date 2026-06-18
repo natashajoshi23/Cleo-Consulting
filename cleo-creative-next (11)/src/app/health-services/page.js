@@ -45,7 +45,7 @@ export default function HealthServices() {
                 <div style={{ fontSize: '0.7rem', color: 'var(--fog)', letterSpacing: '0.05em' }}>{s.l}</div>
               </div>
             ))}
-            <img src="/images/nersify-logo.webp" alt="Nersify" style={{ height: '130px', width: 'auto', objectFit: 'contain', marginLeft: 'auto', opacity: 0.85, marginTop: '-2rem' }} />
+            <img src="/images/nersify-logo.webp" alt="Nersify" className="nersify-logo" />
           </div>
         </div>
 

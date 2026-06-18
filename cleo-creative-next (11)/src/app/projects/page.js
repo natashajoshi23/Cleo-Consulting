@@ -17,6 +17,28 @@ const projects = [
 export default function Projects() {
   return (
     <>
+      {/* Mobile-only: hide description text, shrink title font on project cards */}
+      <style jsx global>{`
+        @media (max-width: 640px) {
+          .proj-desc {
+            display: none !important;
+          }
+          .proj-title {
+            font-size: 0.95rem !important;
+            margin-bottom: 0 !important;
+          }
+          .proj-title-lg {
+            font-size: 1.05rem !important;
+            margin-bottom: 0 !important;
+          }
+          .proj-view {
+            font-size: 0.55rem !important;
+            letter-spacing: 0.08em !important;
+            white-space: nowrap !important;
+          }
+        }
+      `}</style>
+
       <PageBanner eyebrow="Onshore or Offshore" title="OUR<br>PROJECTS" num="06" bgImage="/images/laptop-teamwork.webp" />
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 2rem 5rem' }}>
         <p style={{ fontSize: '0.95rem', color: 'var(--fog)', lineHeight: 1.85, maxWidth: '720px', marginBottom: '3rem', textAlign: 'center', margin: '0 auto 1.5rem' }}>Strategic partnerships delivering consulting projects with both onshore and offshore delivery models.</p>
@@ -33,9 +55,9 @@ export default function Projects() {
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,18,41,0.95) 0%, rgba(0,18,41,0.3) 50%, transparent 100%)', pointerEvents: 'none' }} />
               </div>
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2rem' }}>
-                <div style={{ fontFamily: 'var(--serif)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem', lineHeight: 1.3 }}>{title}</div>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '0.75rem' }}>{desc}</p>
-                <span style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
+                <div className="proj-title-lg" style={{ fontFamily: 'var(--serif)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem', lineHeight: 1.3 }}>{title}</div>
+                <p className="proj-desc" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '0.75rem' }}>{desc}</p>
+                <span className="proj-view" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
               </div>
             </Link>
           ))}
@@ -53,8 +75,8 @@ export default function Projects() {
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,18,41,0.95) 0%, rgba(0,18,41,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
               </div>
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem' }}>
-                <div style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.3rem', lineHeight: 1.3 }}>{title}</div>
-                <span style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
+                <div className="proj-title" style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.3rem', lineHeight: 1.3 }}>{title}</div>
+                <span className="proj-view" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
               </div>
             </Link>
           ))}
@@ -71,8 +93,8 @@ export default function Projects() {
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,18,41,0.95) 0%, rgba(0,18,41,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
               </div>
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem' }}>
-                <div style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.3rem', lineHeight: 1.3 }}>{title}</div>
-                <span style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
+                <div className="proj-title" style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.3rem', lineHeight: 1.3 }}>{title}</div>
+                <span className="proj-view" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
               </div>
             </Link>
           ))}
@@ -90,9 +112,9 @@ export default function Projects() {
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,18,41,0.95) 0%, rgba(0,18,41,0.3) 50%, transparent 100%)', pointerEvents: 'none' }} />
               </div>
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2rem' }}>
-                <div style={{ fontFamily: 'var(--serif)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem', lineHeight: 1.3 }}>{title}</div>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '0.75rem' }}>{desc}</p>
-                <span style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}><span>View Details</span><span className="sr-only"> about {title}</span> →</span>
+                <div className="proj-title-lg" style={{ fontFamily: 'var(--serif)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem', lineHeight: 1.3 }}>{title}</div>
+                <p className="proj-desc" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '0.75rem' }}>{desc}</p>
+                <span className="proj-view" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}><span>View Details</span><span className="sr-only"> about {title}</span> →</span>
               </div>
             </Link>
           ))}
