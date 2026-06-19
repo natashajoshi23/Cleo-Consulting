@@ -164,7 +164,7 @@ export default function Navbar() {
             <li>
               <div style={{ display: 'flex', overflow: 'hidden', borderRadius: '2px' }}>
                 <Link href="/contact" style={{ padding: '0.6rem 2rem', background: pathname === '/contact' ? 'var(--paper)' : 'transparent', border: '1px solid var(--fog)', borderRight: 'none', fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: pathname === '/contact' ? 'var(--ink)' : 'var(--paper)', textDecoration: 'none', fontWeight: 550, transition: 'all 0.3s' }}>Contact</Link>
-                <Link href="/apply" style={{ padding: '0.6rem 2rem', background: 'var(--gold)', border: '1px solid var(--gold)', fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink)', textDecoration: 'none', fontWeight: 750, transition: 'all 0.3s' }}>Apply Now</Link>
+                <Link href="/apply" className="apply-cta-link" style={{ padding: '0.6rem 2rem', background: 'var(--gold)', border: '1px solid var(--gold)', fontSize: '0.9rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink)', textDecoration: 'none', fontWeight: 750, transition: 'all 0.3s' }}>Apply Now</Link>
               </div>
             </li>
             <li><ThemeButton /></li>
@@ -274,7 +274,7 @@ export default function Navbar() {
               color: isDark ? fog : '#333',
               textDecoration: 'none', fontSize: '0.8rem', letterSpacing: '0.14em', textTransform: 'uppercase',
             }}>Contact</Link>
-            <Link href="/apply" style={{
+            <Link href="/apply" className="apply-cta-link" style={{
               display: 'block', padding: '1rem', textAlign: 'center',
               background: gold, color: '#001229',
               textDecoration: 'none', fontSize: '0.8rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 700,

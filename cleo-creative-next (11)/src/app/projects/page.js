@@ -20,15 +20,24 @@ export default function Projects() {
       {/* Mobile-only: hide description text, shrink title font on project cards */}
       <style jsx global>{`
         @media (max-width: 640px) {
+          .proj-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .proj-img-wrap {
+            height: 240px !important;
+          }
+          .proj-content {
+            padding: 1.5rem !important;
+          }
           .proj-desc {
             display: none !important;
           }
           .proj-title {
-            font-size: 0.95rem !important;
+            font-size: 1rem !important;
             margin-bottom: 0 !important;
           }
           .proj-title-lg {
-            font-size: 1.05rem !important;
+            font-size: 1rem !important;
             margin-bottom: 0 !important;
           }
           .proj-view {
@@ -44,17 +53,17 @@ export default function Projects() {
         <p style={{ fontSize: '0.95rem', color: 'var(--fog)', lineHeight: 1.85, maxWidth: '720px', marginBottom: '3rem', textAlign: 'center', margin: '0 auto 1.5rem' }}>Strategic partnerships delivering consulting projects with both onshore and offshore delivery models.</p>
 
         {/* Featured first two - large */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+        <div className="proj-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
           {projects.slice(0, 2).map(({ title, desc, img, slug }) => (
             <Link href={"/projects/" + slug} key={slug} style={{ textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden', borderRadius: '2px', border: '1px solid var(--ghost)' }}>
-              <div style={{ height: '320px', overflow: 'hidden', position: 'relative' }}>
+              <div className="proj-img-wrap" style={{ height: '320px', overflow: 'hidden', position: 'relative' }}>
                 <img src={img} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s, filter 0.5s', filter: 'sepia(20%) saturate(120%) brightness(0.7)' }}
                   onMouseOver={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'sepia(0%) saturate(100%) brightness(0.8)' }}
                   onMouseOut={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'sepia(20%) saturate(120%) brightness(0.7)' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,18,41,0.95) 0%, rgba(0,18,41,0.3) 50%, transparent 100%)', pointerEvents: 'none' }} />
               </div>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2rem' }}>
+              <div className="proj-content" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2rem' }}>
                 <div className="proj-title-lg" style={{ fontFamily: 'var(--serif)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem', lineHeight: 1.3 }}>{title}</div>
                 <p className="proj-desc" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '0.75rem' }}>{desc}</p>
                 <span className="proj-view" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
@@ -64,17 +73,17 @@ export default function Projects() {
         </div>
 
         {/* Remaining projects - 3 column grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
+        <div className="proj-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
           {projects.slice(2, 5).map(({ title, desc, img, slug }) => (
             <Link href={"/projects/" + slug} key={slug} style={{ textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden', borderRadius: '2px', border: '1px solid var(--ghost)' }}>
-              <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
+              <div className="proj-img-wrap" style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
                 <img src={img} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s, filter 0.5s', filter: 'sepia(20%) saturate(120%) brightness(0.7)' }}
                   onMouseOver={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'sepia(0%) saturate(100%) brightness(0.8)' }}
                   onMouseOut={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'sepia(20%) saturate(120%) brightness(0.7)' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,18,41,0.95) 0%, rgba(0,18,41,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
               </div>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem' }}>
+              <div className="proj-content" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem' }}>
                 <div className="proj-title" style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.3rem', lineHeight: 1.3 }}>{title}</div>
                 <span className="proj-view" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
               </div>
@@ -82,17 +91,17 @@ export default function Projects() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
+        <div className="proj-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
           {projects.slice(5, 8).map(({ title, desc, img, slug }) => (
             <Link href={"/projects/" + slug} key={slug} style={{ textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden', borderRadius: '2px', border: '1px solid var(--ghost)' }}>
-              <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
+              <div className="proj-img-wrap" style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
                 <img src={img} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s, filter 0.5s', filter: 'sepia(20%) saturate(120%) brightness(0.7)' }}
                   onMouseOver={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'sepia(0%) saturate(100%) brightness(0.8)' }}
                   onMouseOut={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'sepia(20%) saturate(120%) brightness(0.7)' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,18,41,0.95) 0%, rgba(0,18,41,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
               </div>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem' }}>
+              <div className="proj-content" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem' }}>
                 <div className="proj-title" style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '0.3rem', lineHeight: 1.3 }}>{title}</div>
                 <span className="proj-view" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}>View Details {'\u2192'}</span>
               </div>
@@ -101,17 +110,17 @@ export default function Projects() {
         </div>
 
         {/* Last two - large again */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div className="proj-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
           {projects.slice(8).map(({ title, desc, img, slug }) => (
             <Link href={"/projects/" + slug} key={slug} style={{ textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden', borderRadius: '2px', border: '1px solid var(--ghost)' }}>
-              <div style={{ height: '320px', overflow: 'hidden', position: 'relative' }}>
+              <div className="proj-img-wrap" style={{ height: '320px', overflow: 'hidden', position: 'relative' }}>
                 <img src={img} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s, filter 0.5s', filter: 'sepia(20%) saturate(120%) brightness(0.7)' }}
                   onMouseOver={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.filter = 'sepia(0%) saturate(100%) brightness(0.8)' }}
                   onMouseOut={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.filter = 'sepia(20%) saturate(120%) brightness(0.7)' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,18,41,0.95) 0%, rgba(0,18,41,0.3) 50%, transparent 100%)', pointerEvents: 'none' }} />
               </div>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2rem' }}>
+              <div className="proj-content" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '2rem' }}>
                 <div className="proj-title-lg" style={{ fontFamily: 'var(--serif)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem', lineHeight: 1.3 }}>{title}</div>
                 <p className="proj-desc" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginBottom: '0.75rem' }}>{desc}</p>
                 <span className="proj-view" style={{ fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)' }}><span>View Details</span><span className="sr-only"> about {title}</span> →</span>

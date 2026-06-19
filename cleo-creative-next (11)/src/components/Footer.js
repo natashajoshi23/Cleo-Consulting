@@ -41,9 +41,13 @@ export default function Footer() {
           </div>
           <div className="ft-bottom">
             <span>© 2026 Cleo Consulting. All rights reserved.</span>
-            <a href="/privacy-policy">Privacy Policy</a>
-            <a href="/sitemap">Sitemap</a>
-            <a href="https://www.linkedin.com/company/cleo-consulting-inc-/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)' }}>LinkedIn</a>
+            <div className="ft-bottom-links">
+              <a href="/privacy-policy">Privacy Policy</a>
+              <span className="ft-dot"> • </span>
+              <a href="/sitemap">Sitemap</a>
+              <span className="ft-dot"> • </span>
+              <a href="https://www.linkedin.com/company/cleo-consulting-inc-/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)' }}>LinkedIn</a>
+            </div>
           </div>
         </div>
       </footer>

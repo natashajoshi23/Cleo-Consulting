@@ -207,8 +207,19 @@ export default function ApplyPage() {
                     onMouseOver={e => e.currentTarget.style.borderColor = 'var(--gold)'}
                     onMouseOut={e => e.currentTarget.style.borderColor = errors.resume ? '#e74c3c' : 'var(--ghost)'}
                   >
-                    <span style={{ color: 'var(--gold)' }}>{'\u2191'}</span> {fileName || 'Choose file (PDF, DOC)'}
-                    <input id="apply-resume" name="Resume Upload" type="file" accept=".pdf,.doc,.docx" style={{ display: 'none' }} onChange={e => { setFileName(e.target.files[0]?.name || ''); setErrors({...errors, resume: ''}) }} />
+                    <span style={{ color: 'var(--gold)' }}>{'\u2191'}</span> {fileName || 'Choose file (PDF, DOC, DOCX)'}
+                    <input id="apply-resume" name="Resume Upload" type="file" accept=".pdf,.doc,.docx" style={{ display: 'none' }} onChange={e => {
+                      const file = e.target.files[0]
+                      const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB — keep in sync with backend limit
+                      if (file && file.size > MAX_FILE_SIZE) {
+                        setFileName('')
+                        e.target.value = ''
+                        setErrors({...errors, resume: 'File must be under 2MB.'})
+                        return
+                      }
+                      setFileName(file?.name || '')
+                      setErrors({...errors, resume: ''})
+                    }} />
                   </label>
                   {errors.resume && <span role="alert" style={errorStyle}>{errors.resume}</span>}
                 </div>
